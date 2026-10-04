@@ -17,9 +17,9 @@ export const bentoItems: BentoItem[] = [
     id: 'b-1',
     gridClass: 'b-1',
     type: 'text',
-    label: '01 / Intro',
-    title: "We're a bunch of makers.",
-    desc: "It's time to make AI accessible for everyone. We run on coffee, code, and crazy ideas.",
+    label: '01 / IrsyadLabs & Xiaozhi',
+    title: 'Inovasi Maker IrsyadLabs',
+    desc: 'Dedikasi menghadirkan hardware asisten AI & Voice AI berbasis Xiaozhi Indonesia dari laboratorium IrsyadLabs yang terjangkau, open-source, dan berdaya guna nyata.',
   },
   {
     id: 'b-2',
