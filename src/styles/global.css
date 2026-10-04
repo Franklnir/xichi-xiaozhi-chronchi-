@@ -465,22 +465,17 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  transform: translateY(-100%) rotate(-2deg) scale(1.15);
-  transition: transform 0.55s var(--thud);
+  transform: translateY(-120%) rotate(-2deg) scale(1.15);
+  transition: transform 0.55s var(--thud), visibility 0.55s ease;
   padding: 40px 20px;
-}
-
-.mobile-menu::before {
-  content: '';
-  position: absolute;
-  inset: 20px;
-  border: 4px dashed var(--black);
+  visibility: hidden;
   pointer-events: none;
-  opacity: 0.15;
 }
 
 .mobile-menu.active {
   transform: translateY(0) rotate(0) scale(1);
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .mobile-menu a {
