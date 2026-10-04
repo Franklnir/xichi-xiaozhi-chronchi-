@@ -264,7 +264,7 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
 .navbar-brand {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   text-decoration: none;
   z-index: 100000;
   transition: transform 0.25s var(--pop);
@@ -277,10 +277,10 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
 
 .brand-badge {
   flex-shrink: 0;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   background: #ffffff;
-  border: 3.5px solid var(--yellow);
+  border: 3px solid var(--black);
   box-shadow: 4px 4px 0 var(--red);
   display: flex;
   justify-content: center;
@@ -304,19 +304,27 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
 
 .brand-title {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(26px, 2.4vw, 36px);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  color: var(--yellow);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--black);
+  background: var(--white);
+  padding: 8px 14px;
+  border: 3px solid var(--black);
+  box-shadow: 3px 3px 0 var(--red);
   line-height: 1;
   text-transform: uppercase;
   user-select: none;
-  transition: color 0.2s, transform 0.2s var(--pop);
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s var(--pop);
 }
 
 .navbar-brand:hover .brand-title {
-  color: #ffffff;
-  transform: translateX(2px);
+  background: var(--yellow);
+  color: var(--black);
+  box-shadow: 4px 4px 0 var(--black);
+  transform: translate(-1px, -1px);
 }
 
 .logo-box {
@@ -440,8 +448,8 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
   .nav-pill { display: none !important; }
   .hamburger { display: flex !important; }
   .navbar { width: calc(100% - 24px) !important; padding: 0 8px; }
-  .brand-badge { width: 44px; height: 44px; }
-  .brand-title { font-size: 24px; }
+  .brand-badge { width: 42px; height: 42px; }
+  .brand-title { font-size: 18px; padding: 6px 10px; }
 }
 
 /* ============================================================
