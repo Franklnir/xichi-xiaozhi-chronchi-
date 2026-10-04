@@ -52,10 +52,10 @@ export const siteConfig: SiteConfig = {
   navItems: [
     { label: 'Home', href: '#home', sectionId: 'home' },
     { label: 'Products', href: '#products', sectionId: 'products' },
+    { label: 'Studio', href: '#culture', sectionId: 'culture' },
     { label: 'Voice', href: '#voice', sectionId: 'voice' },
     { label: 'Tools', href: '#tools', sectionId: 'tools' },
     { label: 'Compare', href: '#comparison', sectionId: 'comparison' },
-    { label: 'Studio', href: '#culture', sectionId: 'culture' },
     { label: 'Chronos', href: '#chronchi', sectionId: 'chronchi' },
     { label: 'Buy', href: '#buy', sectionId: 'buy' },
   ],

@@ -2012,6 +2012,7 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
   background: var(--yellow);
   color: var(--black);
   padding: clamp(60px, 8vw, 110px) clamp(24px, 4vw, 64px);
+  border-bottom: 4px solid var(--black);
 }
 
 .bento-grid {
