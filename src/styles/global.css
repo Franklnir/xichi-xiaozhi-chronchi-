@@ -2173,14 +2173,9 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
 
 .phone-mockup {
   position: relative;
-  max-width: 340px;
+  max-width: 300px;
   width: 100%;
   margin: 0 auto;
-  aspect-ratio: 9 / 19;
-  background: var(--black);
-  border: 3px solid var(--yellow);
-  padding: 12px;
-  box-shadow: 8px 8px 0 var(--yellow);
   animation: phoneFloat 5s ease-in-out infinite;
 }
 
@@ -2189,255 +2184,37 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
   50% { transform: translateY(-12px) rotate(1.5deg); }
 }
 
-.phone-screen {
+.phone-screen.phone-screen-img {
   width: 100%;
-  height: 100%;
-  background: var(--white);
+  background: var(--black);
+  border: 3.5px solid var(--yellow);
+  border-radius: 28px;
+  padding: 8px;
+  box-shadow: 10px 10px 0 var(--yellow);
   overflow: hidden;
   display: flex;
-  flex-direction: column;
-}
-
-.phone-status {
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--black);
-}
-
-.phone-header {
-  padding: 12px 20px;
-  display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  transition: transform 0.25s var(--pop), box-shadow 0.25s var(--snap), border-color 0.2s;
 }
 
-.phone-greet {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.5;
+.phone-mockup:hover .phone-screen.phone-screen-img {
+  transform: translate(-3px, -3px) rotate(1deg);
+  box-shadow: 14px 14px 0 var(--red);
+  border-color: var(--white);
 }
 
-.phone-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.phone-avatar {
-  width: 34px;
-  height: 34px;
-  background: var(--yellow);
-  color: var(--black);
-  border: 2px solid var(--black);
-  display: grid;
-  place-items: center;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  transform: rotate(-4deg);
-}
-
-.phone-device {
-  margin: 8px 16px;
-  padding: 16px;
-  background: var(--black);
-  color: var(--white);
-  border: 2px solid var(--black);
-}
-
-.phone-device-status {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  color: var(--green);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-
-.phone-device-status::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  background: var(--green);
-  border-radius: 50%;
-  animation: blink 1.4s steps(2) infinite;
-}
-
-.phone-device-name {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.phone-device-meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.phone-toggles {
-  padding: 8px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.phone-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.4);
-  padding: 4px;
-}
-
-.phone-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 14px;
-  background: rgba(0, 0, 0, 0.05);
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  user-select: none;
-  transition: background 0.2s;
-}
-
-.phone-toggle:hover {
-  background: rgba(0, 0, 0, 0.09);
-}
-
-.phone-toggle-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 800;
-  color: var(--black);
-}
-
-.phone-switch {
-  width: 38px;
-  height: 22px;
-  background: rgba(0, 0, 0, 0.15);
-  border: 2px solid var(--black);
-  position: relative;
-  transition: background 0.3s;
-}
-
-.phone-switch::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  left: 1px;
-  width: 16px;
-  height: 16px;
-  background: var(--black);
+.phone-app-real-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 20px;
   transition: transform 0.3s var(--pop);
 }
 
-.phone-switch.on {
-  background: var(--green);
-}
-
-.phone-switch.on::after {
-  transform: translateX(15px);
-  background: var(--white);
-}
-
-.phone-notif-box {
-  margin: 4px 16px 8px;
-  padding: 10px 12px;
-  background: rgba(0, 210, 106, 0.15);
-  border: 2px solid var(--black);
-  text-align: left;
-}
-
-.phone-notif-box .notif-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
-  font-weight: 800;
-  color: var(--black);
-  margin-bottom: 2px;
-}
-
-.phone-notif-box .notif-sender {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 11.5px;
-  font-weight: 800;
-  color: var(--black);
-}
-
-.phone-notif-box .notif-text {
-  font-size: 10.5px;
-  color: #333;
-  line-height: 1.35;
-  font-weight: 500;
-}
-
-.phone-music-box {
-  margin: 4px 16px 8px;
-  padding: 10px 12px;
-  background: rgba(255, 230, 0, 0.2);
-  border: 2px solid var(--black);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: left;
-}
-
-.phone-music-box .music-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px;
-  font-weight: 800;
-  color: #555;
-  margin-bottom: 2px;
-}
-
-.phone-music-box .music-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 11.5px;
-  font-weight: 800;
-  color: var(--black);
-  line-height: 1.2;
-}
-
-.phone-music-box .music-artist {
-  font-size: 10px;
-  color: #555;
-}
-
-.phone-music-box .music-ctrls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: var(--black);
-  user-select: none;
-}
-
-.phone-music-box .music-ctrls .play-btn {
-  background: var(--black);
-  color: var(--yellow);
-  width: 22px;
-  height: 22px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  font-size: 10px;
+.phone-mockup:hover .phone-app-real-img {
+  transform: scale(1.02);
 }
 
 .feature-chip {
