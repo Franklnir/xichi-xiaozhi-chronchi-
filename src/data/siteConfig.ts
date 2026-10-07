@@ -57,6 +57,7 @@ export const siteConfig: SiteConfig = {
     { label: 'Tools', href: '#tools', sectionId: 'tools' },
     { label: 'Compare', href: '#comparison', sectionId: 'comparison' },
     { label: 'Chronos', href: '#chronchi', sectionId: 'chronchi' },
+    { label: 'Tentang', href: '/tentang', sectionId: 'tentang' },
     { label: 'FAQ', href: '#faq', sectionId: 'faq' },
   ],
   socialLinks: [

@@ -43,6 +43,12 @@ export const GET: APIRoute = async () => {
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
+  <url>
+    <loc>${siteUrl}/tentang</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>`;
 
   return new Response(sitemap.trim(), {
