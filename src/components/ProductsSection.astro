@@ -18,37 +18,15 @@ import { hardwareProducts } from '../data/products';
       hardwareProducts.map((product) => (
         <article class={`product-card ${product.featured ? 'featured' : ''}`} data-product-id={product.id}>
           <div class="product-visual">
-            {product.id === 'xichi-pocket' && (
-              <img
-                src="/assets/products/xichi-pocket-real.webp"
-                alt="Xichi Pocket Real Hardware - ESP32-C3 SuperMini"
-                loading="lazy"
-                decoding="async"
-                class="product-real-img"
-              />
-            )}
-
-            {product.id === 'xichi-core' && (
-              <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
-                <rect x="18" y="24" width="64" height="52" rx="8" stroke="#FFE600" stroke-width="3" />
-                <circle cx="50" cy="50" r="18" fill="#FF3B30" opacity="0.2" />
-                <circle cx="50" cy="50" r="14" stroke="#FFE600" stroke-width="2" />
-                <circle cx="44" cy="48" r="2.5" fill="#FFE600" />
-                <circle cx="56" cy="48" r="2.5" fill="#FFE600" />
-                <path d="M44 56 Q50 62 56 56" stroke="#FFE600" stroke-width="2" fill="none" stroke-linecap="round" />
-              </svg>
-            )}
-
-            {product.id === 'xichi-vision-pro' && (
-              <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
-                <rect x="18" y="24" width="64" height="52" rx="8" stroke="#000" stroke-width="3" />
-                <circle cx="50" cy="50" r="16" stroke="#FF3B30" stroke-width="3" fill="none" />
-                <circle cx="50" cy="50" r="8" fill="#FF3B30" opacity="0.4" />
-                <circle cx="50" cy="50" r="3" fill="#000" />
-              </svg>
-            )}
+            <span class="product-badge-tag">{product.badge}</span>
+            <img
+              src={product.image}
+              alt={`${product.name} - ${product.chipset}`}
+              loading="lazy"
+              decoding="async"
+              class="product-real-img"
+            />
           </div>
-
           <div class="product-info">
             <h3 class="product-name">{product.name}</h3>
             <div class="product-chip">{product.chipset}</div>
@@ -131,7 +109,7 @@ import { hardwareProducts } from '../data/products';
           <span class="modal-price-label">Harga Varian</span>
           <div class="modal-price-value" id="modalPriceDisplay">Rp 300 rb</div>
         </div>
-        <button type="button" class="btn-brutal" id="btnModalPreorder">
+        <button type="button" class="btn btn-dark" id="btnModalPreorder">
           <span>Pre-Order Varian Ini</span>
           <span class="arrow" aria-hidden="true">→</span>
         </button>
@@ -164,6 +142,11 @@ import { hardwareProducts } from '../data/products';
     if (modalStatus) modalStatus.textContent = product.status;
     if (modalName) modalName.textContent = product.name;
     if (modalChip) modalChip.textContent = product.chipset;
+    const modalImg = document.getElementById('modalProductImg') as HTMLImageElement | null;
+    if (modalImg && product.image) {
+      modalImg.src = product.image;
+      modalImg.alt = product.name;
+    }
 
     if (modalSpecsGrid) {
       modalSpecsGrid.innerHTML = product.specs
@@ -243,3 +226,284 @@ import { hardwareProducts } from '../data/products';
     }, 150);
   });
 </script>
+
+<style>
+  .products-section {
+    background: #ebebeb !important;
+    padding: clamp(70px, 8vw, 110px) clamp(24px, 4vw, 48px) !important;
+    position: relative;
+  }
+
+  .products-section .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 52px;
+  }
+
+  .products-section .section-header p {
+    display: inline-block !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 5px 16px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 14px !important;
+  }
+
+  .products-section .section-header h2,
+  .products-section .section-header h2 .word > span {
+    color: #0c0c0c !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: clamp(2rem, 4.2vw, 3.2rem) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 28px !important;
+    max-width: 1140px !important;
+    margin: 0 auto !important;
+    align-items: stretch !important;
+  }
+
+  .product-card {
+    background: #ffffff !important;
+    border-radius: 32px !important;
+    padding: 32px 28px !important;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05) !important;
+    border: 2px solid #0c0c0c !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    transition: transform 0.25s var(--pop), box-shadow 0.25s var(--snap) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .product-card.featured {
+    border-color: #0c0c0c !important;
+    box-shadow: 0 14px 40px rgba(228, 230, 30, 0.28) !important;
+  }
+
+  .product-visual {
+    background: #fafaf5 !important;
+    border-radius: 20px !important;
+    border: 2px solid #0c0c0c !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    aspect-ratio: 4 / 3 !important;
+    width: 100% !important;
+    display: block !important;
+    margin-bottom: 22px !important;
+  }
+
+  .product-badge-tag {
+    position: absolute !important;
+    top: 12px !important;
+    left: 12px !important;
+    z-index: 3 !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 4px 12px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .product-real-img {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    max-width: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
+  }
+
+  .product-card:hover .product-real-img {
+    transform: scale(1.08) !important;
+  }
+
+  .product-info {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+  }
+
+  .product-name {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    font-family: 'Sora', sans-serif !important;
+    color: #0c0c0c !important;
+    margin-bottom: 6px !important;
+    line-height: 1.2 !important;
+  }
+
+  .product-chip {
+    display: inline-block !important;
+    align-self: flex-start !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 3px 12px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    border: 1px solid #0c0c0c !important;
+    margin-bottom: 12px !important;
+  }
+
+  .product-desc {
+    font-size: 13.5px !important;
+    color: #4f4f4f !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+    flex-grow: 1 !important;
+  }
+
+  .btn-view-specs {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 11px 18px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #0c0c0c !important;
+    border-radius: 999px !important;
+    color: #0c0c0c !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    margin-bottom: 20px !important;
+    transition: background 0.15s ease, transform 0.15s ease !important;
+  }
+
+  .btn-view-specs:hover {
+    background: #ebebeb !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .product-price-row {
+    padding-top: 16px !important;
+    border-top: 1px dashed rgba(12, 12, 12, 0.14) !important;
+    margin-bottom: 18px !important;
+  }
+
+  .price-label {
+    font-size: 11.5px !important;
+    color: #4f4f4f !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .price-value {
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+    font-family: 'Sora', sans-serif !important;
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+  }
+
+  .price-value .currency {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #4f4f4f !important;
+  }
+
+  .price-old {
+    font-size: 14px !important;
+    color: #888888 !important;
+    text-decoration: line-through !important;
+    margin-left: 8px !important;
+  }
+
+  .btn-buy {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 14px 24px !important;
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border-radius: 999px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+  }
+
+  .btn-buy:hover {
+    background: #1f1f1f !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18) !important;
+  }
+
+  .product-card.featured .btn-buy {
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+  }
+
+  .product-card.featured .btn-buy:hover {
+    background: #edf024 !important;
+    box-shadow: 0 10px 24px rgba(228, 230, 30, 0.35) !important;
+  }
+
+  @media (max-width: 960px) {
+    .product-grid {
+      grid-template-columns: 1fr !important;
+      max-width: 480px !important;
+    }
+  }
+
+  .specs-modal-top {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 16px !important;
+  }
+  .specs-modal-thumb {
+    width: 68px !important;
+    height: 68px !important;
+    border-radius: 16px !important;
+    background: #fafaf5 !important;
+    border: 1px solid rgba(12, 12, 12, 0.1) !important;
+    display: grid !important;
+    place-items: center !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+    padding: 6px !important;
+  }
+  .modal-thumb-img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+  }
+
+</style>

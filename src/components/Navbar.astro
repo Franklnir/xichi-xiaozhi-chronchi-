@@ -1,5 +1,5 @@
 ---
-// Navbar.astro - Neo-brutalist sticky navbar with desktop pill and mobile menu
+// Navbar.astro - Belajar AI Style Clean Floating Island Navigation
 import { siteConfig } from '../data/siteConfig';
 
 const navItems = siteConfig.navItems;
@@ -14,206 +14,113 @@ const resolveHref = (href: string) => {
   return href;
 };
 ---
-<nav class="navbar" id="navbar" aria-label="Navigasi utama">
-  <a href={isHome ? '#home' : '/'} class="navbar-brand" aria-label="Xichi — Beranda">
-    <div class="brand-badge">
-      <img src="/assets/logoxichi.jpg" alt="Logo Xichi AI" class="brand-badge-img" />
-    </div>
-    <span class="brand-title">XICHI</span>
-  </a>
 
-  <div class="nav-pill" role="navigation">
-    {
-      navItems.map((item, idx) => {
-        const href = resolveHref(item.href);
-        const isActive = isHome ? idx === 0 : currentPath === item.href;
-        return (
-          <a href={href} class={isActive ? 'active' : ''} data-section={item.sectionId}>
-            {item.label}
-          </a>
-        );
-      })
-    }
-  </div>
+<header class="site-header">
+  <nav class="nav" id="navbar" aria-label="Navigasi utama">
+    <a href={isHome ? '#home' : '/'} class="logo" aria-label="Xichi AI — Beranda">
+      <img src="/assets/logoxichi.jpg" alt="Logo Xichi AI" width="40" height="40" />
+      <span class="logo-text">
+        <b>Xichi AI</b>
+        <small>Asisten Fisik Meja Kerja</small>
+      </span>
+    </a>
 
-  <div class="nav-right">
-    <!-- Theme Switcher Control -->
-    <div class="theme-control">
-      <button
-        type="button"
-        class="theme-toggle"
-        id="themeToggle"
-        data-theme-toggle
-        data-current-theme="brand"
-        aria-controls="themePicker"
-        aria-expanded="false"
-        aria-haspopup="menu"
-        aria-label="Pilih tema tampilan"
-        title="Tema aktif: Brand Ink"
-      >
-        <span aria-hidden="true" class="theme-option-swatch theme-current-swatch">
-          <i></i><i></i><i></i>
-        </span>
-        <span class="theme-label-text">Tema</span>
+    <ul class="nav-links">
+      {
+        navItems.map((item, idx) => {
+          const href = resolveHref(item.href);
+          const isActive = isHome ? idx === 0 : currentPath === item.href;
+          return (
+            <li>
+              <a href={href} class={isActive ? 'active' : ''} data-section={item.sectionId}>
+                {item.label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="nav-right">
+      <button type="button" class="btn btn-sm btn-dark open-preorder-modal" aria-label="Buka form pre-order">
+        Pre-Order <span aria-hidden="true">→</span>
       </button>
 
-      <div
-        class="theme-options header-theme-picker"
-        id="themePicker"
-        data-theme-picker
-        role="menu"
-        aria-label="Pilihan tema tampilan"
+      <button
+        class="hamburger"
+        id="hamburger"
+        aria-label="Buka menu navigasi"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
       >
-        <button
-          type="button"
-          role="menuitemradio"
-          data-theme-option="dark"
-          aria-checked="false"
-        >
-          <span aria-hidden="true" class="theme-option-swatch theme-option-swatch--dark">
-            <i></i><i></i><i></i>
-          </span>
-          <span>Cyber Dark</span>
-        </button>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <div class="mobile-links">
+        {
+          navItems.map((item) => (
+            <a href={resolveHref(item.href)} class="mobile-link">
+              {item.label}
+            </a>
+          ))
+        }
         <button
           type="button"
-          role="menuitemradio"
-          data-theme-option="brand"
-          class="active"
-          aria-checked="true"
+          class="btn btn-dark open-preorder-modal"
+          style="margin-top: 18px; width: 100%; background: #0c0c0c !important; background-color: #0c0c0c !important; color: #ffffff !important;"
         >
-          <span aria-hidden="true" class="theme-option-swatch theme-option-swatch--brand">
-            <i></i><i></i><i></i>
-          </span>
-          <span>Brand Ink</span>
+          Pre-Order Sekarang →
         </button>
       </div>
     </div>
-
-    <button class="hamburger" id="hamburger" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobileMenu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
   </div>
-</nav>
+</header>
 
-<!-- Mobile Drawer Menu -->
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-label="Menu navigasi mobile">
-  {
-    navItems.map((item) => (
-      <a href={resolveHref(item.href)} class="mobile-link">
-        {item.label}
-      </a>
-    ))
+<style>
+  .btn-dark {
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border-radius: 999px !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 700 !important;
+    border: none !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
   }
-
-  <div class="mobile-theme-row">
-    <span class="mobile-theme-title">GAYA TEMA</span>
-    <div class="mobile-theme-options">
-      <button type="button" class="mobile-theme-btn" data-theme-option="dark" aria-label="Aktifkan tema Cyber Dark" aria-checked="false">
-        <span aria-hidden="true" class="theme-option-swatch theme-option-swatch--dark">
-          <i></i><i></i><i></i>
-        </span>
-        <span>Cyber Dark</span>
-      </button>
-      <button type="button" class="mobile-theme-btn active" data-theme-option="brand" aria-label="Aktifkan tema Brand Ink" aria-checked="true">
-        <span aria-hidden="true" class="theme-option-swatch theme-option-swatch--brand">
-          <i></i><i></i><i></i>
-        </span>
-        <span>Brand Ink</span>
-      </button>
-    </div>
-  </div>
-</div>
+  .btn-sm {
+    padding: 9px 20px !important;
+    font-size: 13.5px !important;
+  }
+  .btn-dark:hover {
+    background: #1f1f1f !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16) !important;
+  }
+  .mobile-links .btn-dark {
+    padding: 14px 24px !important;
+    font-size: 15px !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12) !important;
+  }
+</style>
 
 <script>
-  // Theme Controller
-  type Theme = 'dark' | 'brand';
-  const STORAGE_KEY = 'xichi-theme';
-  const root = document.documentElement;
-  const themeToggle = document.getElementById('themeToggle');
-  const themePicker = document.getElementById('themePicker');
-  const themeButtons = document.querySelectorAll<HTMLButtonElement>('[data-theme-option]');
-  const themeColorMeta = document.getElementById('themeColor') as HTMLMetaElement | null;
-
-  const themeColors: Record<Theme, string> = {
-    dark: '#FFE600',
-    brand: '#f5ecdc',
-  };
-
-  const updateControls = (theme: Theme) => {
-    themeToggle?.setAttribute('data-current-theme', theme);
-    themeToggle?.setAttribute('title', `Tema aktif: ${theme === 'brand' ? 'Brand Ink' : 'Cyber Dark'}`);
-    themeButtons.forEach((btn) => {
-      const isCurrent = btn.dataset.themeOption === theme;
-      btn.setAttribute('aria-checked', String(isCurrent));
-      btn.classList.toggle('active', isCurrent);
-    });
-  };
-
-  const applyTheme = (theme: Theme, persist = false) => {
-    root.dataset.theme = theme;
-    if (themeColorMeta) {
-      themeColorMeta.setAttribute('content', themeColors[theme]);
-    }
-    updateControls(theme);
-    if (persist) {
-      try {
-        localStorage.setItem(STORAGE_KEY, theme);
-      } catch {
-        // Fallback gracefully if storage is restricted
-      }
-    }
-  };
-
-  // Sync initial theme
-  const initialTheme = (root.dataset.theme === 'dark' ? 'dark' : 'brand') as Theme;
-  applyTheme(initialTheme, false);
-
-  // Toggle dropdown picker
-  themeToggle?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = themePicker?.classList.toggle('open');
-    themeToggle.setAttribute('aria-expanded', String(isOpen));
-  });
-
-  // Handle option select from both header dropdown & mobile menu
-  themeButtons.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const selected = btn.dataset.themeOption as Theme;
-      if (selected === 'brand' || selected === 'dark') {
-        applyTheme(selected, true);
-        themePicker?.classList.remove('open');
-        themeToggle?.setAttribute('aria-expanded', 'false');
-      }
-    });
-  });
-
-  // Close dropdown on outside click
-  document.addEventListener('click', (e) => {
-    if (themePicker && !themePicker.contains(e.target as Node) && !themeToggle?.contains(e.target as Node)) {
-      themePicker.classList.remove('open');
-      themeToggle?.setAttribute('aria-expanded', 'false');
-    }
-  });
-
-  // Close dropdown on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && themePicker?.classList.contains('open')) {
-      themePicker.classList.remove('open');
-      themeToggle?.setAttribute('aria-expanded', 'false');
-      themeToggle?.focus();
-    }
-  });
-
   // Navbar scroll & mobile menu handling
   const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
-  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-pill a');
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-links a');
   const mobileLinks = document.querySelectorAll<HTMLAnchorElement>('.mobile-link');
 
   // Shrink navbar on scroll
@@ -236,7 +143,6 @@ const resolveHref = (href: string) => {
       document.body.style.overflow = open ? 'hidden' : '';
     });
 
-    // Close when clicking link
     mobileLinks.forEach((l) => {
       l.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -247,47 +153,36 @@ const resolveHref = (href: string) => {
     });
   }
 
-  // Active pill link on scroll & subpage handling
+  // Active link on scroll
   const sectionMapping: Record<string, string> = {
     home: 'home',
     products: 'products',
-    culture: 'products',
-    voice: 'tools',
+    culture: 'culture',
+    voice: 'voice',
     tools: 'tools',
-    compare: 'tools',
-    chronchi: 'tools',
+    comparison: 'comparison',
+    chronchi: 'chronchi',
     about: 'about',
     pengadaan: 'pengadaan',
     faq: 'faq',
-    contact: 'pengadaan',
   };
 
-  const isTentangPage = window.location.pathname.replace(/\/$/, '').endsWith('tentang');
-
-  if (isTentangPage) {
-    navLinks.forEach((link) => {
-      const href = link.getAttribute('href');
-      link.classList.toggle('active', href?.includes('tentang') || false);
-    });
-  } else {
-    const sectionIds = Object.keys(sectionMapping);
-    window.addEventListener(
-      'scroll',
-      () => {
-        let currentSection = 'home';
-        sectionIds.forEach((id) => {
-          const el = document.getElementById(id);
-          if (el && window.scrollY >= el.offsetTop - 240) {
-            currentSection = id;
-          }
-        });
-        const activeNavKey = sectionMapping[currentSection] || currentSection;
-        navLinks.forEach((link) => {
-          const target = link.getAttribute('href')?.replace('#', '');
-          link.classList.toggle('active', target === activeNavKey);
-        });
-      },
-      { passive: true }
-    );
-  }
+  const sectionIds = Object.keys(sectionMapping);
+  window.addEventListener(
+    'scroll',
+    () => {
+      let currentSection = 'home';
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 200) {
+          currentSection = id;
+        }
+      });
+      navLinks.forEach((link) => {
+        const target = link.getAttribute('href')?.replace('#', '').replace('/', '');
+        link.classList.toggle('active', target === currentSection);
+      });
+    },
+    { passive: true }
+  );
 </script>

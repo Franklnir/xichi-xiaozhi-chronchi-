@@ -15,7 +15,7 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
       <span class="word"><span>PILAR.</span></span>
     </h2>
     <div class="tools-header-action">
-      <button type="button" class="btn-tools-header open-mcp-modal" aria-haspopup="dialog">
+      <button type="button" class="btn-tools-header open-mcp-modal" id="btnOpenMcpHeader" aria-haspopup="dialog" aria-controls="mcpModal">
         <span>⚡ Klik Di Sini Untuk Melihat Seluruh Daftar Tools & Contoh Perintah Suara</span>
         <span class="arrow" aria-hidden="true">→</span>
       </button>
@@ -93,7 +93,7 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
   </div>
 
   <div class="tools-cta-row">
-    <button type="button" class="btn-brutal open-mcp-modal" style="padding: 16px 32px; font-size: 14px;">
+    <button type="button" class="btn btn-dark open-mcp-modal" style="padding: 16px 32px; font-size: 14px;">
       <span>📖 Buka Katalog Lengkap 47+ MCP Tools</span>
       <span class="arrow" aria-hidden="true">→</span>
     </button>
@@ -175,7 +175,7 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
         <div class="footer-info">
           💡 <strong>Tips Suara:</strong> Cukup ucapkan salah satu contoh perintah suara di atas saat berdialog dengan Xichi.
         </div>
-        <button type="button" class="btn-brutal" id="btnCloseMcpFooter">
+        <button type="button" class="btn btn-dark" id="btnCloseMcpFooter">
           <span>Tutup Katalog</span>
         </button>
       </div>
@@ -184,10 +184,10 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
 </section>
 
 <script>
-  const mcpModal = document.getElementById('mcpModal');
+  const mcpModal = document.getElementById('mcpModal') as HTMLElement | null;
   const closeMcpBtn = document.getElementById('closeMcpModal');
   const closeMcpFooter = document.getElementById('btnCloseMcpFooter');
-  const openButtons = document.querySelectorAll('.open-mcp-modal');
+  const btnHeader = document.getElementById('btnOpenMcpHeader');
   const searchInput = document.getElementById('mcpSearchInput') as HTMLInputElement | null;
   const catPills = document.querySelectorAll<HTMLButtonElement>('.mcp-cat-pill');
   const catSections = document.querySelectorAll<HTMLElement>('.mcp-cat-section');
@@ -197,6 +197,10 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
     if (!mcpModal) return;
     mcpModal.classList.add('active');
     mcpModal.setAttribute('aria-hidden', 'false');
+    mcpModal.style.display = 'flex';
+    mcpModal.style.opacity = '1';
+    mcpModal.style.visibility = 'visible';
+    mcpModal.style.pointerEvents = 'auto';
     document.body.style.overflow = 'hidden';
     setTimeout(() => searchInput?.focus(), 150);
   }
@@ -205,6 +209,9 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
     if (!mcpModal) return;
     mcpModal.classList.remove('active');
     mcpModal.setAttribute('aria-hidden', 'true');
+    mcpModal.style.opacity = '0';
+    mcpModal.style.visibility = 'hidden';
+    mcpModal.style.pointerEvents = 'none';
     document.body.style.overflow = '';
     if (window.location.hash === '#mcp' || window.location.hash === '#katalog-mcp') {
       history.replaceState(null, '', '#tools');
@@ -217,11 +224,33 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
     }
   }
 
-  window.addEventListener('DOMContentLoaded', checkHash);
-  window.addEventListener('hashchange', checkHash);
-  setTimeout(checkHash, 300);
+  // 1. Direct button triggers
+  btnHeader?.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openModal();
+  });
 
-  openButtons.forEach((btn) => btn.addEventListener('click', openModal));
+  document.querySelectorAll('.open-mcp-modal').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal();
+    });
+  });
+
+  // 2. Delegated document click (catches all clicks on the button or its inner text/spans)
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    const trigger = target?.closest('.open-mcp-modal, #btnOpenMcpHeader, [data-open-modal="mcpModal"]');
+    if (trigger) {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal();
+    }
+  });
+
+  // 3. Modal close bindings
   closeMcpBtn?.addEventListener('click', closeModal);
   closeMcpFooter?.addEventListener('click', closeModal);
 
@@ -234,6 +263,10 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
       closeModal();
     }
   });
+
+  window.addEventListener('DOMContentLoaded', checkHash);
+  window.addEventListener('hashchange', checkHash);
+  setTimeout(checkHash, 300);
 
   let currentCategory = 'all';
 
@@ -277,3 +310,200 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
     });
   });
 </script>
+
+<style>
+  .tools-section {
+    background: #ebebeb !important;
+    padding: clamp(70px, 8vw, 110px) clamp(24px, 4vw, 48px) !important;
+    position: relative;
+  }
+
+  .tools-section .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 48px;
+  }
+
+  .tools-section .section-header p {
+    display: inline-block !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.14) !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 5px 16px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 14px !important;
+  }
+
+  .tools-section .section-header h2,
+  .tools-section .section-header h2 .word > span {
+    color: #0c0c0c !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: clamp(2rem, 4.2vw, 3.2rem) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .tools-header-action {
+    margin-top: 18px;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  .btn-tools-header {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 12px 26px !important;
+    background: #ffffff !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    border-radius: 999px !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06) !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 10 !important;
+    pointer-events: auto !important;
+    user-select: none !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+  }
+
+  .btn-tools-header * {
+    pointer-events: none !important;
+  }
+
+  .btn-tools-header:hover {
+    transform: translateY(-2px) !important;
+    background: #e4e61e !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .tools-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    max-width: 1140px !important;
+    margin: 0 auto !important;
+  }
+
+  .tool-card {
+    background: #ffffff !important;
+    border-radius: 26px !important;
+    padding: 28px 22px !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05) !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.08) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+    position: relative !important;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.09) !important;
+    border-color: #0c0c0c !important;
+  }
+
+  .tool-icon {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 16px !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    display: grid !important;
+    place-items: center !important;
+    margin-bottom: 18px !important;
+    border: 1.5px solid #0c0c0c !important;
+  }
+
+  .tool-icon svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .tool-title {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+    font-family: 'Sora', sans-serif !important;
+    margin-bottom: 8px !important;
+    line-height: 1.25 !important;
+  }
+
+  .tool-desc {
+    font-size: 13.5px !important;
+    color: #4f4f4f !important;
+    line-height: 1.6 !important;
+    margin-bottom: 18px !important;
+    flex-grow: 1 !important;
+  }
+
+  .tool-count {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    background: #fafaf5 !important;
+    border: 1px solid rgba(12, 12, 12, 0.09) !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+  }
+
+  .tool-count .num {
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    padding: 2px 8px !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
+  }
+
+  .tools-cta-row {
+    text-align: center !important;
+    margin-top: 48px !important;
+  }
+
+  .tools-cta-row .btn-brutal {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 16px 36px !important;
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border-radius: 999px !important;
+    font-size: 14.5px !important;
+    font-weight: 700 !important;
+    border: none !important;
+    cursor: pointer !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .tools-cta-row .btn-brutal:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+    background: #1f1f1f !important;
+  }
+
+  @media (max-width: 1024px) {
+    .tools-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tools-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

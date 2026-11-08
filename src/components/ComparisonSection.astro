@@ -1,5 +1,5 @@
 ---
-// ComparisonSection.astro - 04 / Komparasi 'Xichi vs Smart Speaker Konvensional'
+// ComparisonSection.astro - 05 / Komparasi 'Xichi vs Smart Speaker Konvensional' (Compact Belajar AI Design)
 import { comparisonData } from '../data/comparisons';
 ---
 
@@ -12,26 +12,35 @@ import { comparisonData } from '../data/comparisons';
       <span class="word"><span>SPEAKER</span></span>{' '}
       <span class="word"><span>KONVENSIONAL.</span></span>
     </h2>
+    <div class="comp-view-toggle-bar">
+      <div class="comp-view-toggle" role="tablist" aria-label="Pilih format tampilan">
+        <button type="button" class="comp-toggle-btn active" id="btnToggleTable" aria-selected="true" aria-controls="compTableView">
+          <span>▦ Tabel Ringkas</span>
+        </button>
+        <button type="button" class="comp-toggle-btn" id="btnToggleCards" aria-selected="false" aria-controls="compCardsView">
+          <span>📑 Kartu Perbandingan</span>
+        </button>
+      </div>
+    </div>
   </header>
 
   <div class="comparison-container">
-    <!-- Desktop Table View -->
-    <div class="comparison-table-wrapper">
+    <!-- VIEW 1: Ultra-Compact Slim Table (Desktop & Tablets) -->
+    <div class="comparison-table-wrapper" id="compTableView">
       <table class="comparison-table">
         <thead>
           <tr>
-            <th class="th-criteria">Kriteria / Fitur</th>
+            <th class="th-criteria">KRITERIA</th>
             <th class="th-xichi">
-              <div class="table-brand-badge">
-                <span class="crown-badge">★ REKOMENDASI TERBAIK</span>
-                <span class="brand-name">XICHI PHYSICAL AI</span>
-                <span class="sub-tag">Asisten AI Fisik Masa Depan</span>
+              <div class="brand-pill xichi-brand-pill">
+                <span class="pill-badge">★ REKOMENDASI TERBAIK</span>
+                <span class="pill-name">XICHI PHYSICAL AI</span>
               </div>
             </th>
             <th class="th-conventional">
-              <div class="table-brand-badge muted">
-                <span class="brand-name">GOOGLE NEST / ALEXA</span>
-                <span class="sub-tag">Smart Speaker Generasi Lama</span>
+              <div class="brand-pill conv-brand-pill">
+                <span class="pill-badge muted">SPEAKER BIASA</span>
+                <span class="pill-name">GOOGLE NEST / ALEXA</span>
               </div>
             </th>
           </tr>
@@ -41,25 +50,27 @@ import { comparisonData } from '../data/comparisons';
             comparisonData.map((row, idx) => (
               <tr class={idx % 2 === 0 ? 'even-row' : 'odd-row'}>
                 <td class="td-category">
-                  <div class="category-num">0{idx + 1}</div>
-                  <div class="category-name">{row.category}</div>
+                  <div class="cat-lockup">
+                    <span class="cat-idx">0{idx + 1}</span>
+                    <strong class="cat-label">{row.category}</strong>
+                  </div>
                 </td>
                 <td class="td-xichi">
-                  <div class="cell-content">
-                    <div class="cell-header">
-                      <span class="icon-verdict ok" aria-hidden="true">✓</span>
+                  <div class="cell-box">
+                    <div class="cell-head">
+                      <span class="verdict-icon ok" aria-hidden="true">✓</span>
                       <strong class="cell-title">{row.xichi.title}</strong>
-                      {row.xichi.tag && <span class="spec-chip xichi-chip">{row.xichi.tag}</span>}
+                      {row.xichi.tag && <span class="spec-chip xichi-tag">{row.xichi.tag}</span>}
                     </div>
                     <p class="cell-desc">{row.xichi.description}</p>
                   </div>
                 </td>
                 <td class="td-conventional">
-                  <div class="cell-content">
-                    <div class="cell-header">
-                      <span class="icon-verdict bad" aria-hidden="true">✕</span>
+                  <div class="cell-box">
+                    <div class="cell-head">
+                      <span class="verdict-icon bad" aria-hidden="true">✕</span>
                       <strong class="cell-title">{row.conventional.title}</strong>
-                      {row.conventional.tag && <span class="spec-chip conv-chip">{row.conventional.tag}</span>}
+                      {row.conventional.tag && <span class="spec-chip conv-tag">{row.conventional.tag}</span>}
                     </div>
                     <p class="cell-desc">{row.conventional.description}</p>
                   </div>
@@ -71,39 +82,702 @@ import { comparisonData } from '../data/comparisons';
       </table>
     </div>
 
-    <!-- Mobile Stacked Card View -->
-    <div class="comparison-mobile-list">
-      {
-        comparisonData.map((row, idx) => (
-          <article class="comparison-mobile-card">
-            <div class="mobile-card-top">
-              <span class="badge-num">KRITERIA 0{idx + 1}</span>
-              <h3 class="mobile-criteria-title">{row.category}</h3>
-            </div>
+    <!-- VIEW 2: Belajar AI Interactive Compare Card (.compare-box) -->
+    <div class="comparison-interactive-wrapper" id="compCardsView" style="display: none;">
+      <!-- Category Tabs (Horizontal Pill Selector) -->
+      <div class="comp-tabs-bar" role="tablist" aria-label="Pilih kriteria untuk dibandingkan">
+        {
+          comparisonData.map((row, idx) => (
+            <button
+              type="button"
+              class={`comp-tab-pill ${idx === 0 ? 'active' : ''}`}
+              data-index={idx}
+              role="tab"
+              aria-selected={idx === 0 ? 'true' : 'false'}
+            >
+              <span class="tab-index">0{idx + 1}</span>
+              <span class="tab-text">{row.category.split(' ')[0]}</span>
+            </button>
+          ))
+        }
+      </div>
 
-            <!-- Xichi side -->
-            <div class="mobile-side xichi-side">
-              <div class="side-label-bar">
-                <span class="side-pill xichi-pill">✓ XICHI AI</span>
-                {row.xichi.tag && <span class="mini-tag">{row.xichi.tag}</span>}
+      <!-- Compare Panels -->
+      <div class="comp-cards-deck">
+        {
+          comparisonData.map((row, idx) => (
+            <div
+              class={`comp-panel ${idx === 0 ? 'active' : ''}`}
+              data-panel={idx}
+              role="tabpanel"
+              style={idx === 0 ? 'display: block;' : 'display: none;'}
+            >
+              <div class="comp-panel-top">
+                <span class="panel-badge">KRITERIA 0{idx + 1}</span>
+                <h3 class="panel-category-name">{row.category}</h3>
               </div>
-              <h4 class="side-title">{row.xichi.title}</h4>
-              <p class="side-desc">{row.xichi.description}</p>
-            </div>
 
-            <!-- Conventional side -->
-            <div class="mobile-side conv-side">
-              <div class="side-label-bar">
-                <span class="side-pill conv-pill">✕ GOOGLE NEST / ALEXA</span>
-                {row.conventional.tag && <span class="mini-tag">{row.conventional.tag}</span>}
+              <div class="compare-grid">
+                <!-- Conventional Side -->
+                <div class="compare-card is-conv">
+                  <div class="card-side-head">
+                    <span class="badge-tag conv">✕ GOOGLE NEST / ALEXA</span>
+                    {row.conventional.tag && <span class="mini-chip">{row.conventional.tag}</span>}
+                  </div>
+                  <h4 class="card-verdict-title">{row.conventional.title}</h4>
+                  <p class="card-verdict-desc">{row.conventional.description}</p>
+                </div>
+
+                <!-- Xichi Side (Belajar AI Highlight) -->
+                <div class="compare-card is-xichi">
+                  <div class="card-side-head">
+                    <span class="badge-tag xichi">★ XICHI PHYSICAL AI</span>
+                    {row.xichi.tag && <span class="mini-chip xichi">{row.xichi.tag}</span>}
+                  </div>
+                  <h4 class="card-verdict-title">{row.xichi.title}</h4>
+                  <p class="card-verdict-desc">{row.xichi.description}</p>
+                </div>
               </div>
-              <h4 class="side-title">{row.conventional.title}</h4>
-              <p class="side-desc">{row.conventional.description}</p>
+
+              <!-- Compact Navigation -->
+              <div class="comp-panel-nav">
+                <button
+                  type="button"
+                  class="btn-nav-step prev-step"
+                  data-target={idx - 1}
+                  disabled={idx === 0}
+                  aria-label="Kriteria sebelumnya"
+                >
+                  ← Sebelumnya
+                </button>
+                <span class="nav-count-indicator">
+                  {idx + 1} / {comparisonData.length}
+                </span>
+                <button
+                  type="button"
+                  class="btn-nav-step next-step"
+                  data-target={idx + 1}
+                  disabled={idx === comparisonData.length - 1}
+                  aria-label="Kriteria selanjutnya"
+                >
+                  Selanjutnya →
+                </button>
+              </div>
             </div>
-          </article>
-        ))
-      }
+          ))
+        }
+      </div>
     </div>
-
   </div>
 </section>
+
+<script>
+  // Toggle between Table and Interactive Cards
+  const btnTable = document.getElementById('btnToggleTable');
+  const btnCards = document.getElementById('btnToggleCards');
+  const viewTable = document.getElementById('compTableView');
+  const viewCards = document.getElementById('compCardsView');
+
+  function showTable() {
+    if (!viewTable || !viewCards) return;
+    viewTable.style.display = 'block';
+    viewCards.style.display = 'none';
+    btnTable?.classList.add('active');
+    btnTable?.setAttribute('aria-selected', 'true');
+    btnCards?.classList.remove('active');
+    btnCards?.setAttribute('aria-selected', 'false');
+  }
+
+  function showCards() {
+    if (!viewTable || !viewCards) return;
+    viewTable.style.display = 'none';
+    viewCards.style.display = 'block';
+    btnCards?.classList.add('active');
+    btnCards?.setAttribute('aria-selected', 'true');
+    btnTable?.classList.remove('active');
+    btnTable?.setAttribute('aria-selected', 'false');
+  }
+
+  btnTable?.addEventListener('click', showTable);
+  btnCards?.addEventListener('click', showCards);
+
+  // Auto-switch to cards on mobile screen resize
+  function handleScreenResize() {
+    if (window.innerWidth <= 860) {
+      showCards();
+    }
+  }
+  window.addEventListener('resize', handleScreenResize);
+  if (window.innerWidth <= 860) {
+    showCards();
+  }
+
+  // Interactive Tabbed Card Navigation
+  const tabPills = document.querySelectorAll<HTMLButtonElement>('.comp-tab-pill');
+  const panels = document.querySelectorAll<HTMLElement>('.comp-panel');
+  const navSteps = document.querySelectorAll<HTMLButtonElement>('.btn-nav-step');
+
+  function setActiveCriteria(targetIdx: number) {
+    if (targetIdx < 0 || targetIdx >= tabPills.length) return;
+
+    tabPills.forEach((pill, i) => {
+      const isMatch = i === targetIdx;
+      pill.classList.toggle('active', isMatch);
+      pill.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+    });
+
+    panels.forEach((p, i) => {
+      const isMatch = i === targetIdx;
+      p.style.display = isMatch ? 'block' : 'none';
+      p.classList.toggle('active', isMatch);
+    });
+  }
+
+  tabPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      const idx = Number(pill.getAttribute('data-index') || '0');
+      setActiveCriteria(idx);
+    });
+  });
+
+  navSteps.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const target = Number(btn.getAttribute('data-target'));
+      if (!isNaN(target)) {
+        setActiveCriteria(target);
+      }
+    });
+  });
+</script>
+
+<style>
+  /* ============================================================
+     COMPACT BELAJAR AI COMPARISON SECTION (LOW PROFILE & TIGHT)
+     ============================================================ */
+
+  .comparison-section {
+    background: #ebebeb !important;
+    padding: clamp(38px, 4vw, 56px) clamp(20px, 4vw, 40px) !important;
+    position: relative !important;
+  }
+
+  .comparison-section .section-header {
+    text-align: center !important;
+    max-width: 800px !important;
+    margin: 0 auto 24px !important;
+  }
+
+  .comparison-section .section-header p {
+    display: inline-block !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 4px 14px !important;
+    font-weight: 800 !important;
+    font-size: 11px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 10px !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+  }
+
+  .comparison-section .section-header h2,
+  .comparison-section .section-header h2 .word > span {
+    color: #0c0c0c !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: clamp(1.8rem, 3.4vw, 2.5rem) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    letter-spacing: -0.02em !important;
+    line-height: 1.2 !important;
+    margin: 0 0 16px !important;
+  }
+
+  /* View Switcher Bar (Pill Toggle) */
+  .comp-view-toggle-bar {
+    display: flex !important;
+    justify-content: center !important;
+    margin-top: 12px !important;
+  }
+
+  .comp-view-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    background: #ffffff !important;
+    padding: 4px !important;
+    border-radius: 999px !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.12) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
+  }
+
+  .comp-toggle-btn {
+    border-radius: 999px !important;
+    padding: 6px 16px !important;
+    background: transparent !important;
+    color: #4f4f4f !important;
+    border: none !important;
+    font-family: 'Sora', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease !important;
+  }
+
+  .comp-toggle-btn:hover {
+    color: #0c0c0c !important;
+  }
+
+  .comp-toggle-btn.active {
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+  }
+
+  .comparison-container {
+    max-width: 1080px !important;
+    margin: 0 auto !important;
+  }
+
+  /* ------------------------------------------------------------
+     1. COMPACT STREAMLINED TABLE
+     ------------------------------------------------------------ */
+  .comparison-table-wrapper {
+    background: #ffffff !important;
+    border-radius: 24px !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.12) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04) !important;
+    overflow: hidden !important;
+  }
+
+  .comparison-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    text-align: left !important;
+  }
+
+  .comparison-table thead th {
+    padding: 14px 20px !important;
+    background: #fafaf6 !important;
+    border-bottom: 1.5px solid rgba(12, 12, 12, 0.1) !important;
+    vertical-align: middle !important;
+  }
+
+  .th-criteria {
+    width: 20% !important;
+    font-family: 'Sora', sans-serif !important;
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.06em !important;
+    color: #777777 !important;
+  }
+
+  .th-xichi {
+    width: 42% !important;
+    background: #faf8e6 !important;
+    border-left: 1px solid rgba(12, 12, 12, 0.08) !important;
+    border-right: 1px solid rgba(12, 12, 12, 0.08) !important;
+  }
+
+  .th-conventional {
+    width: 38% !important;
+  }
+
+  .brand-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    border-radius: 999px !important;
+    padding: 4px 12px !important;
+    font-family: 'Sora', sans-serif !important;
+  }
+
+  .brand-pill.xichi-brand-pill {
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1px solid #0c0c0c !important;
+  }
+
+  .pill-badge {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .pill-badge.muted {
+    font-size: 10px !important;
+    color: #777777 !important;
+    font-weight: 700 !important;
+  }
+
+  .pill-name {
+    font-size: 12.5px !important;
+    font-weight: 800 !important;
+  }
+
+  .brand-pill.conv-brand-pill {
+    background: #f0f0ea !important;
+    color: #4f4f4f !important;
+    border: 1px solid rgba(12, 12, 12, 0.1) !important;
+  }
+
+  /* Table Body */
+  .comparison-table tbody tr {
+    border-bottom: 1px solid rgba(12, 12, 12, 0.07) !important;
+    transition: background 0.12s ease !important;
+  }
+
+  .comparison-table tbody tr:last-child {
+    border-bottom: none !important;
+  }
+
+  .comparison-table tbody tr:hover {
+    background: #fbfbf8 !important;
+  }
+
+  .comparison-table tbody td {
+    padding: 12px 20px !important;
+    vertical-align: top !important;
+  }
+
+  .td-category {
+    background: #fafaf8 !important;
+    border-right: 1px solid rgba(12, 12, 12, 0.07) !important;
+  }
+
+  .cat-lockup {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .cat-idx {
+    font-family: 'Sora', monospace !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    padding: 2px 6px !important;
+    border-radius: 6px !important;
+    border: 1px solid #0c0c0c !important;
+    flex-shrink: 0 !important;
+  }
+
+  .cat-label {
+    font-family: 'Sora', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+    line-height: 1.35 !important;
+  }
+
+  .td-xichi {
+    background: #fdfdf5 !important;
+    border-left: 1px solid rgba(12, 12, 12, 0.07) !important;
+    border-right: 1px solid rgba(12, 12, 12, 0.07) !important;
+  }
+
+  .cell-box {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+  }
+
+  .cell-head {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .verdict-icon.ok {
+    color: #178a4c !important;
+    font-weight: 900 !important;
+    font-size: 15px !important;
+    line-height: 1 !important;
+  }
+
+  .verdict-icon.bad {
+    color: #e04874 !important;
+    font-weight: 900 !important;
+    font-size: 14px !important;
+    line-height: 1 !important;
+  }
+
+  .cell-title {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: #0c0c0c !important;
+    font-family: 'Sora', sans-serif !important;
+  }
+
+  .spec-chip {
+    display: inline-block !important;
+    padding: 2px 8px !important;
+    border-radius: 999px !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+  }
+
+  .spec-chip.xichi-tag {
+    background: #faf4b7 !important;
+    color: #0c0c0c !important;
+    border: 1px solid #e4e61e !important;
+  }
+
+  .spec-chip.conv-tag {
+    background: #eeeeea !important;
+    color: #666666 !important;
+    border: 1px solid rgba(12, 12, 12, 0.09) !important;
+  }
+
+  .cell-desc {
+    font-size: 12.5px !important;
+    color: #4f4f4f !important;
+    line-height: 1.45 !important;
+    margin: 0 !important;
+  }
+
+  /* ------------------------------------------------------------
+     2. BELAJAR AI INTERACTIVE CARD VIEW (.compare-box)
+     ------------------------------------------------------------ */
+  .comparison-interactive-wrapper {
+    background: #ffffff !important;
+    border-radius: 28px !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.12) !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04) !important;
+    padding: 24px 28px !important;
+  }
+
+  /* Horizontal Pill Selector */
+  .comp-tabs-bar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
+    padding-bottom: 20px !important;
+    border-bottom: 1.5px solid rgba(12, 12, 12, 0.08) !important;
+    margin-bottom: 20px !important;
+  }
+
+  .comp-tab-pill {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 7px 16px !important;
+    border-radius: 999px !important;
+    background: #fafaf5 !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.12) !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+  }
+
+  .comp-tab-pill:hover {
+    background: #ebebeb !important;
+    transform: translateY(-2px) !important;
+  }
+
+  .comp-tab-pill.active {
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border-color: #0c0c0c !important;
+  }
+
+  .comp-tab-pill .tab-index {
+    font-family: 'Sora', monospace !important;
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    opacity: 0.75 !important;
+  }
+
+  .comp-panel-top {
+    text-align: center !important;
+    margin-bottom: 18px !important;
+  }
+
+  .panel-badge {
+    display: inline-block !important;
+    font-size: 10.5px !important;
+    font-weight: 800 !important;
+    color: #777777 !important;
+    letter-spacing: 0.06em !important;
+    margin-bottom: 4px !important;
+  }
+
+  .panel-category-name {
+    font-family: 'Sora', sans-serif !important;
+    font-size: clamp(16px, 2vw, 20px) !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+    margin: 0 !important;
+  }
+
+  /* Compare Grid: 2 Side-by-Side Cards (Belajar AI Style) */
+  .compare-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .compare-card {
+    border-radius: 20px !important;
+    padding: 22px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.1) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  .compare-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .compare-card.is-conv {
+    background: #fafaf6 !important;
+  }
+
+  .compare-card.is-xichi {
+    background: #faf4b7 !important;
+    border-color: #e4e61e !important;
+    box-shadow: 0 6px 20px rgba(228, 230, 30, 0.15) !important;
+  }
+
+  .card-side-head {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin-bottom: 10px !important;
+  }
+
+  .badge-tag {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+    padding: 3px 10px !important;
+    border-radius: 999px !important;
+  }
+
+  .badge-tag.conv {
+    background: #eeeeea !important;
+    color: #666666 !important;
+    border: 1px solid rgba(12, 12, 12, 0.1) !important;
+  }
+
+  .badge-tag.xichi {
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1px solid #0c0c0c !important;
+  }
+
+  .mini-chip {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    padding: 2px 8px !important;
+    border-radius: 999px !important;
+    background: #ffffff !important;
+    color: #4f4f4f !important;
+    border: 1px solid rgba(12, 12, 12, 0.1) !important;
+  }
+
+  .mini-chip.xichi {
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border-color: #0c0c0c !important;
+  }
+
+  .card-verdict-title {
+    font-family: 'Sora', sans-serif !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+    margin: 0 0 8px !important;
+    line-height: 1.3 !important;
+  }
+
+  .card-verdict-desc {
+    font-size: 13.5px !important;
+    color: #3f3f3f !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+  }
+
+  /* Compact Bottom Navigation */
+  .comp-panel-nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding-top: 14px !important;
+    border-top: 1.5px solid rgba(12, 12, 12, 0.08) !important;
+  }
+
+  .btn-nav-step {
+    border-radius: 999px !important;
+    padding: 8px 20px !important;
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    transition: background 0.15s ease, opacity 0.15s ease !important;
+  }
+
+  .btn-nav-step:hover:not(:disabled) {
+    background: #2b2b2b !important;
+  }
+
+  .btn-nav-step:disabled {
+    opacity: 0.35 !important;
+    cursor: not-allowed !important;
+    background: #888888 !important;
+  }
+
+  .nav-count-indicator {
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    color: #777777 !important;
+    font-family: 'Sora', monospace !important;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 860px) {
+    .comparison-table-wrapper {
+      display: none !important;
+    }
+    .comparison-interactive-wrapper {
+      display: block !important;
+      padding: 18px 16px !important;
+    }
+    .comp-view-toggle-bar {
+      display: none !important;
+    }
+    .compare-grid {
+      grid-template-columns: 1fr !important;
+      gap: 12px !important;
+    }
+    .comp-tabs-bar {
+      overflow-x: auto !important;
+      justify-content: flex-start !important;
+      flex-wrap: nowrap !important;
+      padding-bottom: 12px !important;
+      scrollbar-width: none !important;
+    }
+    .comp-tabs-bar::-webkit-scrollbar {
+      display: none !important;
+    }
+    .comp-tab-pill {
+      flex-shrink: 0 !important;
+    }
+  }
+</style>

@@ -8,37 +8,24 @@ const contactWhatsappMessage = encodeURIComponent(
 ---
 
 <section class="procurement-section" id="pengadaan">
-  <header class="section-header dark">
+  <div class="procurement-header-tag">
     <p>08 / Pengadaan & Kerjasama</p>
-    <h2>
-      <span class="word"><span>SOLUSI</span></span>{' '}
-      <span class="word"><span>UNTUK</span></span>{' '}
-      <span class="word"><span>KAMPUS,</span></span>{' '}
-      <span class="word"><span>SEKOLAH</span></span>{' '}
-      <span class="word"><span>&</span></span>{' '}
-      <span class="word"><span>KANTOR.</span></span>
-    </h2>
-  </header>
+  </div>
 
   <div class="procurement-container">
-    <!-- Explainer Banner (White brutalist card on yellow) -->
+    <!-- Featured Scalloped Wave Banner containing purely the Section Title -->
     <div class="procurement-banner">
-      <div class="banner-icon">📦</div>
-      <div class="banner-text">
-        <h3>Pengadaan Mudah untuk Institusi & Komunitas</h3>
-        <p>
-          Ingin memesan perangkat <strong>Xichi AI</strong> dalam jumlah tertentu untuk <strong>laboratorium praktikum kampus, SMK vokasi, workshop maker, perkantoran, maupun komunitas</strong>? Xichi AI Studio melayani pengadaan unit siap pakai, paket komponen mandiri, modul ajar praktikum, dan pendampingan teknis langsung dari engineer pembuatnya.
-        </p>
+      <div class="scallops" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
       </div>
-      <a
-        href={`https://wa.me/${siteConfig.whatsappNumber}?text=${contactWhatsappMessage}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn-banner-wa"
-      >
-        <span>Diskusi Pengadaan</span>
-        <span class="arrow" aria-hidden="true">→</span>
-      </a>
+
+      <div class="banner-inner">
+        <h2 class="banner-title">
+          SOLUSI UNTUK KAMPUS,<br />
+          SEKOLAH & KANTOR.
+        </h2>
+      </div>
     </div>
 
     <!-- 4 Offering Grid (Crisp white cards with bold black borders & shadows) -->
@@ -109,95 +96,94 @@ const contactWhatsappMessage = encodeURIComponent(
 
 <style>
   .procurement-section {
-    padding: clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px);
-    background: #FFE600 !important;
-    color: #000000;
-    border-top: 4px solid var(--black, #000);
-    border-bottom: 4px solid var(--black, #000);
+    padding: clamp(70px, 8vw, 110px) clamp(24px, 4vw, 48px);
+    background: #ebebeb !important;
+    color: #0c0c0c !important;
     position: relative;
     overflow: hidden;
   }
 
-  .procurement-section .section-header.dark p {
-    color: var(--yellow, #FFE600) !important;
-    background: var(--black, #000) !important;
-    border: 2px solid var(--black, #000) !important;
+  .procurement-header-tag {
+    text-align: center !important;
+    margin-bottom: 24px !important;
   }
 
-  .procurement-section .section-header.dark h2,
-  .procurement-section .section-header.dark h2 .word > span {
-    color: #000000 !important;
+  .procurement-header-tag p {
+    display: inline-block !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 6px 20px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin: 0 !important;
   }
 
   .procurement-container {
-    max-width: 1200px;
-    margin: 40px auto 0 auto;
+    max-width: 1140px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 32px;
   }
 
-  /* Explainer Banner */
+  /* Scallop Wave Banner with Pure Headline */
   .procurement-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    background: #ffffff;
-    border: 3px solid #000000;
-    box-shadow: 6px 6px 0 #000000;
-    padding: 24px 28px;
+    position: relative !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+    background: transparent !important;
+    border-radius: 36px !important;
+    border: 3px solid #0c0c0c !important;
+    box-shadow: 6px 6px 0 #0c0c0c !important;
+    padding: clamp(38px, 5.5vw, 56px) clamp(24px, 4.5vw, 48px) !important;
+    text-align: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
-  .banner-icon {
-    font-size: 38px;
-    line-height: 1;
-    flex-shrink: 0;
+  .procurement-banner .scallops {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    display: flex !important;
+    pointer-events: none !important;
   }
 
-  .banner-text {
-    flex: 1;
+  .procurement-banner .scallops i {
+    flex: 1 !important;
+    margin-right: -1px !important;
+    background: #e4e61e !important;
+    border-radius: 999px !important;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.05) !important;
   }
 
-  .banner-text h3 {
-    font-size: clamp(17px, 2.2vw, 20px);
-    font-weight: 900;
-    color: #000000;
-    margin-bottom: 6px;
-    letter-spacing: -0.01em;
+  .banner-inner {
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 900px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
-  .banner-text p {
-    font-size: 14px;
-    color: #262626;
-    line-height: 1.6;
-  }
-
-  .banner-text strong {
-    color: #000000;
-    font-weight: 800;
-  }
-
-  .btn-banner-wa {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: #000000;
-    color: var(--yellow, #FFE600);
-    font-size: 13.5px;
-    font-weight: 900;
-    text-decoration: none;
-    border: 2px solid #000000;
-    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
-    white-space: nowrap;
-    flex-shrink: 0;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-
-  .btn-banner-wa:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+  .banner-title {
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 900 !important;
+    font-size: clamp(2rem, 4.8vw, 3.6rem) !important;
+    line-height: 1.18 !important;
+    letter-spacing: -0.025em !important;
+    color: #0c0c0c !important;
+    margin: 0 !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
   }
 
   /* 4 Offering Grid */
@@ -209,102 +195,99 @@ const contactWhatsappMessage = encodeURIComponent(
 
   .proc-card {
     background: #ffffff;
-    border: 3px solid #000000;
-    box-shadow: 5px 5px 0 #000000;
-    padding: 28px;
+    border-radius: 28px;
+    border: 2px solid #0c0c0c;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+    padding: 32px 28px;
     display: flex;
     flex-direction: column;
     position: relative;
-    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
   }
 
   .proc-card:hover {
-    border-color: #000000;
-    transform: translate(-2px, -2px);
-    box-shadow: 8px 8px 0 #000000;
-  }
-
-  .proc-card.popular {
-    border-color: var(--red, #FF3B30);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
   }
 
   .popular-ribbon {
     position: absolute;
-    top: 14px;
-    right: 14px;
-    background: var(--red, #FF3B30);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    padding: 3px 8px;
-    border: 2px solid #000;
-    box-shadow: 2px 2px 0 #000;
+    top: 18px;
+    right: 18px;
+    background: #ff5d8f;
+    color: #0c0c0c;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1.5px solid #0c0c0c;
   }
 
   .proc-num {
-    font-size: 30px;
-    font-weight: 900;
-    color: #000000;
+    font-size: 28px;
+    font-weight: 800;
+    color: #0c0c0c;
+    font-family: 'Sora', monospace;
     line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .proc-num.red {
-    color: var(--red, #FF3B30);
+    margin-bottom: 10px;
   }
 
   .proc-cat {
     display: inline-block;
     font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    background: #000000;
-    color: var(--yellow, #FFE600);
-    padding: 2px 8px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    background: #e4e61e;
+    color: #0c0c0c;
+    padding: 4px 12px;
     align-self: flex-start;
-    margin-bottom: 10px;
-    border: 1px solid #000;
+    margin-bottom: 12px;
+    border-radius: 999px;
+    border: 1px solid #0c0c0c;
   }
 
   .proc-title {
     font-size: 18px;
-    font-weight: 900;
-    color: #000000;
+    font-weight: 800;
+    color: #0c0c0c;
+    font-family: 'Sora', sans-serif;
     margin-bottom: 8px;
     line-height: 1.3;
   }
 
   .proc-desc {
     font-size: 13.5px;
-    color: #404040;
+    color: #4f4f4f;
     line-height: 1.6;
-    margin-bottom: 16px;
+    margin-bottom: 18px;
   }
 
   .proc-bullets {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 22px;
     flex-grow: 1;
+    padding: 0;
   }
 
   .proc-bullets li {
-    font-size: 13px;
-    color: #171717;
+    font-size: 13.5px;
+    color: #0c0c0c;
     line-height: 1.5;
-    font-weight: 500;
+    font-weight: 600;
   }
 
   .proc-badge {
-    padding: 6px 12px;
-    background: #f5f5f5;
-    border: 2px solid #000000;
-    color: #1a1a1a;
-    font-size: 11px;
-    font-weight: 800;
+    padding: 8px 16px;
+    background: #fafaf5;
+    border: 1px solid rgba(12, 12, 12, 0.1);
+    border-radius: 999px;
+    color: #4f4f4f;
+    font-size: 11.5px;
+    font-weight: 700;
     margin-top: auto;
   }
 
@@ -312,7 +295,7 @@ const contactWhatsappMessage = encodeURIComponent(
     .procurement-banner {
       flex-direction: column;
       align-items: flex-start;
-      gap: 16px;
+      gap: 20px;
     }
 
     .btn-banner-wa {
@@ -324,44 +307,12 @@ const contactWhatsappMessage = encodeURIComponent(
       grid-template-columns: 1fr;
     }
   }
-
-  /* Brand Ink Overrides */
-  :global(:root[data-theme='brand']) .procurement-section {
-    background: var(--brand-yellow, #f8ba08) !important;
-    color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .procurement-banner {
-    background: var(--brand-paper, #fff8ec) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-    box-shadow: 6px 6px 0 var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .banner-text h3 {
-    color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .banner-text p {
-    color: #4a443a !important;
-  }
-
-  :global(:root[data-theme='brand']) .proc-card {
-    background: var(--brand-paper, #fff8ec) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-    box-shadow: 6px 6px 0 var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .proc-card h4 {
-    color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .proc-card p {
-    color: #4a443a !important;
-  }
-
-  :global(:root[data-theme='brand']) .proc-badge {
-    background: var(--brand-cream, #f5ecdc) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-    color: var(--brand-black, #0b0b0a) !important;
-  }
 </style>
+
+<script>
+  document.querySelectorAll('.procurement-banner .scallops').forEach((row) => {
+    [...row.children].forEach((column, i) => {
+      (column as HTMLElement).style.setProperty('--n', i.toString());
+    });
+  });
+</script>

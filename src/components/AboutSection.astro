@@ -23,7 +23,7 @@
 
       <div class="founder-profile-row">
         <div class="founder-avatar">
-          <span class="avatar-letter">I</span>
+          <img src="/assets/logoxichi.jpg" alt="Irsyad - Founder Xichi AI" class="founder-avatar-img" />
         </div>
         <div class="founder-meta">
           <h3 class="founder-name">Irsyad</h3>
@@ -108,22 +108,34 @@
 <style>
   .about-home-section {
     padding: clamp(60px, 8vw, 100px) clamp(20px, 4vw, 40px);
-    background: #0b0b0a;
-    color: #ffffff;
-    border-top: 4px solid var(--black, #000);
-    border-bottom: 4px solid var(--black, #000);
+    background: #ebebeb !important;
+    color: #0c0c0c !important;
     position: relative;
   }
 
   .about-home-section .section-header p {
-    background: var(--yellow, #FFE600) !important;
-    color: #000 !important;
-    border-color: var(--yellow, #FFE600) !important;
+    display: inline-block !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 5px 16px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 14px !important;
   }
 
   .about-home-section .section-header h2,
   .about-home-section .section-header h2 .word > span {
-    color: #ffffff !important;
+    color: #0c0c0c !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
 
   .about-home-grid {
@@ -137,14 +149,16 @@
 
   /* Founder Card */
   .about-founder-card {
-    background: #141414;
-    border: 3px solid var(--yellow, #FFE600);
-    box-shadow: 6px 6px 0 var(--black, #000);
-    padding: clamp(24px, 4vw, 36px);
+    background: #ffffff !important;
+    border: 2px solid #0c0c0c !important;
+    box-shadow: 4px 4px 0 #0c0c0c !important;
+    border-radius: 20px !important;
+    padding: clamp(24px, 4vw, 36px) !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    color: #0c0c0c !important;
   }
 
   .founder-badge-strip {
@@ -155,25 +169,27 @@
   }
 
   .badge-role {
-    display: inline-block;
-    padding: 5px 12px;
-    background: var(--yellow, #FFE600);
-    color: #000;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    border: 2px solid #000;
+    display: inline-block !important;
+    padding: 5px 14px !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em !important;
+    border: 1.5px solid #0c0c0c !important;
+    border-radius: 999px !important;
   }
 
   .badge-loc {
-    display: inline-block;
-    padding: 5px 12px;
-    background: #000;
-    color: var(--yellow, #FFE600);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    border: 2px solid var(--yellow, #FFE600);
+    display: inline-block !important;
+    padding: 5px 14px !important;
+    background: #ffffff !important;
+    color: #0c0c0c !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em !important;
+    border: 1.5px solid #0c0c0c !important;
+    border-radius: 999px !important;
   }
 
   .founder-profile-row {
@@ -186,31 +202,33 @@
   .founder-avatar {
     width: 68px;
     height: 68px;
-    background: var(--yellow, #FFE600);
-    color: #000;
-    border: 3px solid #000;
-    box-shadow: 4px 4px 0 var(--red, #FF3B30);
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 2px solid #0c0c0c !important;
+    box-shadow: 3px 3px 0 #0c0c0c !important;
+    border-radius: 50% !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 30px;
     font-weight: 900;
     flex-shrink: 0;
   }
 
   .founder-name {
-    font-size: clamp(22px, 3vw, 28px);
-    font-weight: 900;
-    color: #fff;
+    font-size: clamp(22px, 3vw, 28px) !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+    font-family: 'Sora', sans-serif !important;
     line-height: 1.1;
     margin-bottom: 4px;
     letter-spacing: -0.02em;
   }
 
   .founder-title {
-    font-size: 13px;
-    color: #a3a3a3;
-    font-weight: 600;
+    font-size: 13.5px !important;
+    color: #4f4f4f !important;
+    font-weight: 600 !important;
     line-height: 1.4;
   }
 
@@ -222,18 +240,19 @@
   }
 
   .founder-tags .tag {
-    padding: 4px 10px;
-    background: #222;
-    border: 1px solid #333;
-    color: #e5e5e5;
-    font-size: 11px;
-    font-weight: 700;
+    padding: 5px 12px !important;
+    background: #ebebeb !important;
+    border: 1px solid rgba(12, 12, 12, 0.15) !important;
+    color: #0c0c0c !important;
+    border-radius: 999px !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
   }
 
   .founder-bio {
-    font-size: 14px;
-    color: #d4d4d4;
-    line-height: 1.7;
+    font-size: 14px !important;
+    color: #4f4f4f !important;
+    line-height: 1.7 !important;
     margin-bottom: 28px;
     flex-grow: 1;
   }
@@ -245,49 +264,53 @@
   }
 
   .btn-about-action {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    font-size: 13px;
-    font-weight: 800;
-    text-decoration: none;
-    transition: transform 0.15s, box-shadow 0.15s;
-    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 11px 22px !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    border-radius: 999px !important;
+    text-decoration: none !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+    cursor: pointer !important;
   }
 
   .btn-about-action.solid {
-    background: var(--yellow, #FFE600);
-    color: #000;
-    border: 2px solid #000;
-    box-shadow: 3px 3px 0 #000;
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border: 1.5px solid #0c0c0c !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12) !important;
   }
 
   .btn-about-action.solid:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0 #000;
+    background: #1f1f1f !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
   }
 
   .btn-about-action.outline {
-    background: #1a1a1a;
-    color: #fff;
-    border: 2px solid #444;
+    background: #ffffff !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
   }
 
   .btn-about-action.outline:hover {
-    border-color: var(--yellow, #FFE600);
-    color: var(--yellow, #FFE600);
+    background: #ebebeb !important;
+    transform: translateY(-2px) !important;
   }
 
   /* Studio Card */
   .about-studio-card {
-    background: #141414;
-    border: 3px solid #333;
-    box-shadow: 6px 6px 0 var(--black, #000);
-    padding: clamp(24px, 4vw, 36px);
+    background: #ffffff !important;
+    border: 2px solid #0c0c0c !important;
+    box-shadow: 4px 4px 0 #0c0c0c !important;
+    border-radius: 20px !important;
+    padding: clamp(24px, 4vw, 36px) !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    color: #0c0c0c !important;
   }
 
   .studio-top {
@@ -295,9 +318,10 @@
   }
 
   .studio-heading {
-    font-size: clamp(20px, 2.5vw, 24px);
-    font-weight: 900;
-    color: #fff;
+    font-size: clamp(20px, 2.5vw, 24px) !important;
+    font-weight: 800 !important;
+    font-family: 'Sora', sans-serif !important;
+    color: #0c0c0c !important;
     margin-top: 10px;
     letter-spacing: -0.01em;
   }
@@ -305,22 +329,27 @@
   .pillars-list {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
     margin-bottom: 28px;
   }
 
   .pillar-item {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    padding: 12px;
-    background: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    transition: border-color 0.2s;
+    display: flex !important;
+    gap: 14px !important;
+    align-items: flex-start !important;
+    padding: 14px 16px !important;
+    background: #ffffff !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.14) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04) !important;
+    color: #0c0c0c !important;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
   }
 
   .pillar-item:hover {
-    border-color: var(--yellow, #FFE600);
+    border-color: #0c0c0c !important;
+    box-shadow: 3px 3px 0 #0c0c0c !important;
+    transform: translateY(-2px) !important;
   }
 
   .pillar-icon {
@@ -331,40 +360,43 @@
   }
 
   .pillar-body h4 {
-    font-size: 14px;
-    font-weight: 800;
-    color: #fff;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    font-family: 'Sora', sans-serif !important;
+    color: #0c0c0c !important;
     margin-bottom: 4px;
   }
 
   .pillar-body p {
-    font-size: 12.5px;
-    color: #a3a3a3;
-    line-height: 1.5;
+    font-size: 13.5px !important;
+    color: #4f4f4f !important;
+    line-height: 1.6 !important;
   }
 
   .studio-stats-strip {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    background: #000;
-    border: 2px solid var(--yellow, #FFE600);
-    padding: 14px 10px;
-    text-align: center;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 10px !important;
+    background: #fafaf5 !important;
+    border: 1.5px solid rgba(12, 12, 12, 0.14) !important;
+    border-radius: 14px !important;
+    padding: 16px 12px !important;
+    text-align: center !important;
   }
 
   .stat-mini strong {
-    display: block;
-    color: var(--yellow, #FFE600);
-    font-size: 15px;
-    font-weight: 900;
+    display: block !important;
+    color: #0c0c0c !important;
+    font-size: 16px !important;
+    font-weight: 900 !important;
+    font-family: 'Sora', sans-serif !important;
   }
 
   .stat-mini span {
-    display: block;
-    color: #888;
-    font-size: 10.5px;
-    font-weight: 600;
+    display: block !important;
+    color: #4f4f4f !important;
+    font-size: 11.5px !important;
+    font-weight: 600 !important;
     margin-top: 2px;
   }
 
@@ -381,60 +413,9 @@
       padding: 12px;
     }
   }
-
-  /* Brand Ink Overrides */
-  :global(:root[data-theme='brand']) .about-home-section {
-    background: var(--brand-cream, #f5ecdc) !important;
-    color: var(--brand-black, #0b0b0a) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .about-home-section .section-header p {
-    background: var(--brand-yellow, #f8ba08) !important;
-    color: var(--brand-black, #0b0b0a) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-    font-family: 'Permanent Marker', cursive !important;
-  }
-
-  :global(:root[data-theme='brand']) .about-home-section .section-header h2,
-  :global(:root[data-theme='brand']) .about-home-section .section-header h2 .word > span {
-    color: var(--brand-black, #0b0b0a) !important;
-    font-family: 'Anton', 'Space Grotesk', Impact, sans-serif !important;
-  }
-
-  :global(:root[data-theme='brand']) .about-founder-card {
-    background: var(--brand-paper, #fff8ec) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-    box-shadow: 6px 6px 0 var(--brand-black, #0b0b0a) !important;
-    color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .founder-meta h3 {
-    color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .about-founder-card p {
-    color: #4a443a !important;
-  }
-
-  :global(:root[data-theme='brand']) .about-bento-card {
-    background: var(--brand-paper, #fff8ec) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-    box-shadow: 5px 5px 0 var(--brand-black, #0b0b0a) !important;
-    color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .about-bento-card h3,
-  :global(:root[data-theme='brand']) .about-bento-card p {
-    color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .stat-mini {
-    background: var(--brand-paper, #fff8ec) !important;
-    border-color: var(--brand-black, #0b0b0a) !important;
-  }
-
-  :global(:root[data-theme='brand']) .stat-mini strong {
-    color: var(--brand-red, #ef4316) !important;
+  .founder-avatar-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
   }
 </style>

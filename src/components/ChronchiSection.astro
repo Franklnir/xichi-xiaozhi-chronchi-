@@ -6,7 +6,7 @@ const { sectionBadge, sectionTitleWords, description, features, playStoreUrl, gi
 ---
 
 <section class="chronchi-section" id="chronchi">
-  <header class="section-header dark">
+  <header class="section-header">
     <p>{sectionBadge}</p>
     <h2>
       <span class="word"><span>CHRONOS</span></span>{' '}
@@ -21,33 +21,47 @@ const { sectionBadge, sectionTitleWords, description, features, playStoreUrl, gi
   <div class="chronchi-grid">
     <!-- Real Chronos App Phone Mockup -->
     <div class="phone-mockup" aria-label="Tampilan antarmuka aplikasi Android Chronos by fbiego">
-      <div class="phone-screen phone-screen-img">
-        <img
-          src="/assets/showcase/chronos-app.webp"
-          alt="Antarmuka Aplikasi Android Chronos by fbiego"
-          class="phone-app-real-img"
-          loading="lazy"
-        />
+      <div class="phone-frame">
+        <div class="phone-notch" aria-hidden="true"></div>
+        <div class="phone-screen phone-screen-img">
+          <img
+            src="/assets/showcase/chronos-app.webp"
+            alt="Antarmuka Aplikasi Android Chronos by fbiego"
+            class="phone-app-real-img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      <div class="phone-badge-float">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>BLE Connected</span>
       </div>
     </div>
 
-    <!-- Chronos Copy & Feature List -->
-    <div class="chronchi-content">
-      <p class="chronchi-desc">
-        {description}
-      </p>
+    <!-- Chronos Content Card (Belajar AI style) -->
+    <div class="chronchi-card">
+      <div class="card-top-row">
+        <span class="app-pill">⚡ BLUETOOTH LOW ENERGY</span>
+        <span class="ecosystem-pill">Open Source by @fbiego</span>
+      </div>
+
+      <h3 class="card-main-title">Sinkronkan Notifikasi, Musik & Waktu Secara Mandiri</h3>
+
+      <div class="desc-card">
+        <p>{description}</p>
+      </div>
 
       <ul class="feature-list">
         {
           features.map((feat) => (
-            <li>
-              <div class="feature-num">{feat.num}</div>
-              <div style="flex: 1;">
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; flex-wrap: wrap;">
-                  <div class="feature-title">{feat.title}</div>
-                  {feat.badge && <span class="feature-chip">{feat.badge}</span>}
+            <li class="feature-tile">
+              <div class="feature-num-badge">{feat.num}</div>
+              <div class="feature-body">
+                <div class="feature-top-bar">
+                  <strong class="feature-title">{feat.title}</strong>
+                  {feat.badge && <span class="feature-pill">{feat.badge}</span>}
                 </div>
-                <div class="feature-desc">{feat.desc}</div>
+                <p class="feature-desc">{feat.desc}</p>
               </div>
             </li>
           ))
@@ -59,8 +73,7 @@ const { sectionBadge, sectionTitleWords, description, features, playStoreUrl, gi
           href={playStoreUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-brutal"
-          style="flex: 1; justify-content: space-between;"
+          class="btn btn-dark"
         >
           <span>📱 Google Play Store</span>
           <span class="arrow" aria-hidden="true">↗</span>
@@ -69,13 +82,314 @@ const { sectionBadge, sectionTitleWords, description, features, playStoreUrl, gi
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-brutal outline"
-          style="flex: 1; justify-content: space-between; background: transparent; color: var(--yellow); border-color: var(--yellow); box-shadow: 4px 4px 0 var(--yellow);"
+          class="btn btn-yellow"
         >
-          <span>⭐ GitHub (fbiego)</span>
+          <span>⭐ Source Code GitHub</span>
           <span class="arrow" aria-hidden="true">↗</span>
         </a>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .chronchi-section {
+    background: #ebebeb !important;
+    padding: clamp(70px, 8vw, 110px) clamp(24px, 4vw, 48px) !important;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chronchi-section .section-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 52px;
+  }
+
+  .chronchi-section .section-header p {
+    display: inline-block !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 5px 16px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 14px !important;
+  }
+
+  .chronchi-section .section-header h2,
+  .chronchi-section .section-header h2 .word > span {
+    color: #0c0c0c !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 800 !important;
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .chronchi-grid {
+    display: grid !important;
+    grid-template-columns: 340px 1fr !important;
+    gap: clamp(32px, 5vw, 56px) !important;
+    align-items: center !important;
+    max-width: 1140px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Phone Mockup Styling */
+  .phone-mockup {
+    position: relative;
+    max-width: 310px;
+    margin: 0 auto;
+    animation: phoneFloat 6s ease-in-out infinite;
+  }
+
+  @keyframes phoneFloat {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-10px) rotate(1.2deg); }
+  }
+
+  .phone-frame {
+    background: #ffffff;
+    border-radius: 40px;
+    padding: 14px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.09);
+    border: 2px solid #0c0c0c;
+    position: relative;
+  }
+
+  .phone-notch {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 68px;
+    height: 6px;
+    background: #0c0c0c;
+    border-radius: 999px;
+    z-index: 2;
+  }
+
+  .phone-screen {
+    border-radius: 28px;
+    overflow: hidden;
+    background: #0c0c0c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .phone-app-real-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 28px;
+  }
+
+  .phone-badge-float {
+    position: absolute;
+    bottom: -14px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #0c0c0c;
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.16);
+  }
+
+  .phone-badge-float .live-dot {
+    width: 8px;
+    height: 8px;
+    background: #7fe214;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #7fe214;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  /* The Chronos Card */
+  .chronchi-card {
+    background: #ffffff !important;
+    border-radius: 30px !important;
+    padding: clamp(24px, 3.5vw, 36px) !important;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05) !important;
+    border: 2px solid #0c0c0c !important;
+  }
+
+  .card-top-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .app-pill {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #e4e61e;
+    color: #0c0c0c;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    border: 1.5px solid #0c0c0c;
+  }
+
+  .ecosystem-pill {
+    display: inline-block;
+    padding: 5px 12px;
+    background: #fafaf5;
+    color: #4f4f4f;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid rgba(12, 12, 12, 0.12);
+  }
+
+  .card-main-title {
+    font-size: clamp(19px, 2.2vw, 24px) !important;
+    font-weight: 800 !important;
+    color: #0c0c0c !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 12px !important;
+  }
+
+  .desc-card {
+    background: #fafaf5 !important;
+    border: 1px solid rgba(12, 12, 12, 0.08) !important;
+    border-radius: 16px !important;
+    padding: 12px 18px !important;
+    margin-bottom: 18px !important;
+  }
+
+  .desc-card p {
+    font-size: 13.5px !important;
+    line-height: 1.55 !important;
+    color: #4f4f4f !important;
+    font-weight: 500 !important;
+    margin: 0 !important;
+  }
+
+  .feature-list {
+    list-style: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 9px !important;
+    margin-bottom: 22px !important;
+    padding: 0 !important;
+  }
+
+  .feature-tile {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 10px 14px !important;
+    border-radius: 14px !important;
+    background: #fafaf8 !important;
+    border: 1px solid rgba(12, 12, 12, 0.07) !important;
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+  }
+
+  .feature-tile:hover {
+    background: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05) !important;
+    border-color: #0c0c0c !important;
+  }
+
+  .feature-num-badge {
+    display: grid !important;
+    place-items: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    border-radius: 50% !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    font-size: 11.5px !important;
+    font-weight: 800 !important;
+    flex-shrink: 0 !important;
+    font-family: 'Sora', monospace !important;
+  }
+
+  .feature-body {
+    flex: 1 !important;
+  }
+
+  .feature-top-bar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    margin-bottom: 2px !important;
+  }
+
+  .feature-title {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: #0c0c0c !important;
+    font-family: 'Sora', sans-serif !important;
+  }
+
+  .feature-pill {
+    padding: 2px 10px !important;
+    border-radius: 999px !important;
+    background: #ebebeb !important;
+    color: #0c0c0c !important;
+    font-size: 10.5px !important;
+    font-weight: 700 !important;
+  }
+
+  .feature-desc {
+    font-size: 13px !important;
+    color: #4f4f4f !important;
+    line-height: 1.45 !important;
+    margin: 2px 0 0 0 !important;
+  }
+
+  .chronos-cta-group {
+    display: flex !important;
+    gap: 14px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .chronos-cta-group .btn {
+    flex: 1 !important;
+    min-width: 200px !important;
+    padding: 14px 24px !important;
+    font-size: 14px !important;
+    border-radius: 999px !important;
+  }
+
+  @media (max-width: 900px) {
+    .chronchi-grid {
+      grid-template-columns: 1fr !important;
+      gap: 36px !important;
+    }
+    .phone-mockup {
+      max-width: 260px;
+    }
+    .chronos-cta-group {
+      flex-direction: column !important;
+    }
+  }
+</style>

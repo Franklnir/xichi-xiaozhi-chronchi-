@@ -1,84 +1,361 @@
 ---
-// Hero.astro - Brutalist Hero section with character-drop animation and 3D parallax
+// Hero.astro - Belajar AI Style Playful & Motion-Rich Hero Section
 ---
+
 <section class="hero" id="home">
-  <h1 class="hero-title" id="heroTitle">
-    <span class="line">Asisten AI</span>
-    <span class="line">Fisik <span class="accent">Masa Depan.</span></span>
+  <!-- Twinkling Star Sparks -->
+  <i class="spark" aria-hidden="true">✦</i>
+  <i class="spark" aria-hidden="true">✦</i>
+  <i class="spark" aria-hidden="true">✦</i>
+  <i class="spark" aria-hidden="true">✦</i>
+
+  <!-- Floating Conversation Speech Bubbles -->
+  <div class="float-bubble bubble-left parallax" data-depth="28" aria-hidden="true">
+    "Xichi, nyalain lampu meja kerja!" 💡
+  </div>
+  <div class="float-bubble bubble-right parallax" data-depth="-28" aria-hidden="true">
+    "Siap, lampu nyala & putar Lo-Fi ☕"
+  </div>
+
+  <!-- Floating Reaction Badges -->
+  <div class="react react-left parallax" data-depth="-36" aria-hidden="true">⚡</div>
+  <div class="react react-right parallax" data-depth="36" aria-hidden="true">🤖</div>
+
+  <!-- Floating Interactive Partner Cursors -->
+  <div class="cursor cursor-friend parallax" data-depth="-22" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <path d="M88 12 10 36l38 16 18 38z" fill="#ff5d8f" stroke="#0c0c0c" stroke-width="6" stroke-linejoin="round"/>
+    </svg>
+    <span class="cursor-tag">temen baru</span>
+  </div>
+
+  <div class="cursor parallax" data-depth="32" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="cursorFill" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#e4e61e"/>
+          <stop offset="1" stop-color="#7fe214"/>
+        </linearGradient>
+      </defs>
+      <path d="M12 12 90 36 52 52 34 90z" fill="url(#cursorFill)" stroke="#0c0c0c" stroke-width="6" stroke-linejoin="round"/>
+    </svg>
+    <span class="cursor-tag cursor-tag-you">kamu</span>
+  </div>
+
+  <h1 aria-label="Asisten AI Fisik Teman Masa Depan">
+    <span class="line" aria-hidden="true">
+      Asisten
+      <span class="avatars">
+        <img src="/assets/logoxichi.jpg" alt="" width="240" height="240" />
+        <img src="/assets/products/xichi-pocket-real.webp" alt="" width="240" height="240" />
+        <img src="/assets/products/xichi-core-render.webp" alt="" width="240" height="240" />
+      </span>
+      AI Fisik
+    </span>
+    <span class="line" aria-hidden="true">
+      Teman Masa Depan
+    </span>
   </h1>
 
-  <p class="hero-sub">
-    Teman meja kerja cerdas dengan <strong>wajah ekspresif</strong>,{' '}
-    <strong>memori jangka panjang</strong>, pemutar YouTube mandiri, dan <strong>AI Vision</strong>.
+  <p class="lead">
+    Teman meja kerja cerdas dengan wajah ekspresif, memori jangka panjang, pemutar YouTube mandiri, dan AI Vision on-device.
   </p>
 
-  <div class="hero-ctas">
-    <button type="button" class="btn-brutal open-preorder-modal">
-      <span>Pre-Order Sekarang</span>
-      <span class="arrow" aria-hidden="true">→</span>
+  <div class="cta">
+    <button
+      type="button"
+      class="btn btn-lg btn-dark open-preorder-modal"
+      style="background: #0c0c0c !important; background-color: #0c0c0c !important; color: #ffffff !important;"
+      aria-label="Pre-Order Sekarang"
+    >
+      <span>Pre-Order Sekarang</span> <span aria-hidden="true">→</span>
     </button>
     <a
+      class="btn btn-lg btn-yellow"
       href="https://xiaozhiscig.biz.id"
       target="_blank"
       rel="noopener noreferrer"
-      class="btn-brutal outline"
+      style="background: #e4e61e !important; background-color: #e4e61e !important; color: #0c0c0c !important;"
     >
-      <span>Udah Punya Xichi?</span>
-      <span class="arrow" aria-hidden="true">↗</span>
+      <span>Udah Punya Xichi?</span> <span aria-hidden="true">↗</span>
     </a>
   </div>
 </section>
 
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    padding: 88px 24px 96px;
+    text-align: center;
+    background: transparent;
+  }
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    width: 620px;
+    height: 620px;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: drift 16s ease-in-out infinite;
+  }
+  .hero::before {
+    top: -14%;
+    left: 4%;
+    background: radial-gradient(circle, rgba(228, 230, 30, .45), transparent 66%);
+  }
+  .hero::after {
+    right: 2%;
+    bottom: -24%;
+    background: radial-gradient(circle, rgba(59, 130, 246, .2), transparent 66%);
+    animation-delay: -8s;
+  }
+
+  h1 {
+    font-family: "Sora", system-ui, -apple-system, sans-serif !important;
+    font-size: clamp(2.5rem, 6.2vw, 5rem) !important;
+    font-weight: 800 !important;
+    line-height: 1.16 !important;
+    letter-spacing: -.03em !important;
+    color: var(--ink) !important;
+    text-transform: none !important;
+    margin: 0 !important;
+  }
+
+  .line {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: .24em !important;
+    animation: rise .8s cubic-bezier(.2, .8, .2, 1) backwards !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .line + .line {
+    animation-delay: .12s !important;
+  }
+
+  .avatars {
+    display: inline-flex !important;
+    align-items: center !important;
+    vertical-align: middle !important;
+  }
+  .avatars img {
+    display: block !important;
+    width: .98em !important;
+    height: .98em !important;
+    border-radius: 50% !important;
+    background: var(--white) !important;
+    object-fit: cover !important;
+    box-shadow: 0 0 0 .04em var(--bg) !important;
+    border: none !important;
+    animation: pop-in .5s cubic-bezier(.3, 1.6, .5, 1) backwards !important;
+  }
+  .avatars img + img {
+    margin-left: -.18em !important;
+  }
+  .avatars img:nth-child(1) { animation-delay: .35s; }
+  .avatars img:nth-child(2) { animation-delay: .45s; }
+  .avatars img:nth-child(3) { animation-delay: .55s; }
+
+  .lead {
+    max-width: 660px !important;
+    margin: 36px auto 0 !important;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem) !important;
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+    color: var(--muted) !important;
+  }
+
+  .cta {
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    gap: 18px !important;
+    margin-top: 40px !important;
+  }
+
+  .btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    border-radius: 999px !important;
+    font-weight: 600 !important;
+    white-space: nowrap !important;
+    transition: transform .15s ease, box-shadow .15s ease !important;
+    border: 0 !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    font-family: inherit !important;
+  }
+  .btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .14) !important;
+  }
+  .btn-lg {
+    padding: 19px 44px !important;
+    font-size: 15px !important;
+    min-width: 250px !important;
+  }
+  .btn-dark {
+    background: #0c0c0c !important;
+    color: #ffffff !important;
+    border: 1.5px solid #0c0c0c !important;
+  }
+  .btn-dark:hover {
+    background: #1f1f1f !important;
+    color: #ffffff !important;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .22) !important;
+  }
+  .btn-yellow {
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+  }
+  .btn-yellow:hover {
+    background: #edf024 !important;
+    color: #0c0c0c !important;
+    box-shadow: 0 10px 22px rgba(228, 230, 30, .35) !important;
+  }
+
+  .cursor {
+    position: absolute;
+    top: 38%;
+    left: calc(50% + 360px);
+    width: 96px;
+    z-index: 1;
+    filter: drop-shadow(0 12px 16px rgba(0, 0, 0, .14));
+    animation: float 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .cursor svg { width: 100%; height: auto; }
+  .cursor-friend {
+    top: 44%;
+    left: calc(50% - 460px);
+    width: 76px;
+    animation-delay: -2s;
+  }
+  .cursor-tag {
+    position: absolute;
+    top: 82%;
+    right: 62%;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: #ff5d8f;
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .cursor-tag-you {
+    right: auto;
+    left: 62%;
+    background: #7fe214;
+  }
+
+  .float-bubble {
+    position: absolute;
+    max-width: 240px;
+    padding: 13px 18px;
+    border-radius: 20px;
+    background: var(--white);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .09);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+    animation: float 5s ease-in-out infinite;
+    pointer-events: none;
+    color: var(--ink);
+  }
+  .bubble-left {
+    top: 14%;
+    left: calc(50% - 590px);
+    border-bottom-left-radius: 4px;
+    rotate: -4deg;
+  }
+  .bubble-right {
+    top: 12%;
+    right: calc(50% - 590px);
+    border-bottom-right-radius: 4px;
+    background: var(--yellow);
+    rotate: 3deg;
+    animation-delay: -2.5s;
+  }
+
+  .react {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--white);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, .09);
+    font-size: 27px;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .react-left {
+    top: 74%;
+    left: calc(50% - 540px);
+    animation-delay: -1s;
+  }
+  .react-right {
+    top: 72%;
+    right: calc(50% - 540px);
+    animation-delay: -3.5s;
+  }
+
+  .spark {
+    position: absolute;
+    color: var(--yellow-deep);
+    font-size: 24px;
+    line-height: 1;
+    pointer-events: none;
+    animation: twinkle 3s ease-in-out infinite;
+  }
+  .spark:nth-of-type(1) { top: 18%; left: calc(50% - 340px); animation-delay: 0s; }
+  .spark:nth-of-type(2) { top: 24%; right: calc(50% - 360px); animation-delay: .6s; color: var(--blue); }
+  .spark:nth-of-type(3) { bottom: 22%; left: calc(50% - 370px); animation-delay: 1.2s; color: #ff5d8f; }
+  .spark:nth-of-type(4) { bottom: 26%; right: calc(50% - 350px); animation-delay: 1.8s; }
+
+  @media (max-width: 1240px) {
+    .float-bubble, .react, .spark, .cursor {
+      display: none !important;
+    }
+  }
+</style>
+
 <script>
-  // Split hero title into individual animated character spans
-  (function splitHero() {
-    const lines = document.querySelectorAll<HTMLElement>('.hero-title .line');
-    let charIndex = 0;
-
-    lines.forEach((line) => {
-      const walk = (node: Node) => {
-        const children = Array.from(node.childNodes);
-        children.forEach((child) => {
-          if (child.nodeType === Node.TEXT_NODE) {
-            const text = child.textContent || '';
-            const frag = document.createDocumentFragment();
-            text.split('').forEach((ch) => {
-              if (ch === ' ') {
-                frag.appendChild(document.createTextNode(' '));
-              } else {
-                const span = document.createElement('span');
-                span.textContent = ch;
-                const randomRot = (Math.random() * 30 - 15).toFixed(1) + 'deg';
-                span.style.setProperty('--rot', randomRot);
-                span.style.setProperty('--i', String(charIndex++));
-                frag.appendChild(span);
-              }
-            });
-            node.replaceChild(frag, child);
-          } else if (child.nodeType === Node.ELEMENT_NODE) {
-            walk(child);
-          }
-        });
-      };
-      walk(line);
-    });
-  })();
-
-  // 3D Mouse Parallax (desktop with pointer)
-  if (window.matchMedia('(hover: hover) and (min-width: 1024px)').matches) {
-    const heroTitle = document.getElementById('heroTitle');
+  // 3D Mouse Parallax for hero text and floating decorations (desktop with pointer)
+  if (window.matchMedia('(hover: hover) and (min-width: 1240px)').matches) {
     const hero = document.querySelector<HTMLElement>('.hero');
+    const heroTitle = document.querySelector<HTMLElement>('.hero h1');
+    const parallaxEls = document.querySelectorAll<HTMLElement>('.hero .parallax');
 
-    if (hero && heroTitle) {
+    if (hero) {
       hero.addEventListener('mousemove', (e: MouseEvent) => {
         const rect = hero.getBoundingClientRect();
         const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
         const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-        heroTitle.style.transform = `translate3d(${x * 8}px, ${y * 8}px, 0)`;
+
+        if (heroTitle) {
+          heroTitle.style.transform = `translate3d(${x * 6}px, ${y * 6}px, 0)`;
+        }
+
+        parallaxEls.forEach((el) => {
+          const depth = parseFloat(el.getAttribute('data-depth') || '20');
+          el.style.transform = `translate3d(${x * depth * 0.4}px, ${y * depth * 0.4}px, 0)`;
+        });
       });
 
       hero.addEventListener('mouseleave', () => {
-        heroTitle.style.transform = '';
+        if (heroTitle) heroTitle.style.transform = '';
+        parallaxEls.forEach((el) => (el.style.transform = ''));
       });
     }
   }

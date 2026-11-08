@@ -46,6 +46,156 @@ import { voiceSamples } from '../data/voiceSamples';
   </div>
 </section>
 
+<style>
+  .voice-section {
+    background: #ebebeb !important;
+    padding: clamp(60px, 8vw, 110px) clamp(24px, 4vw, 64px) !important;
+    color: #0c0c0c !important;
+    position: relative;
+  }
+
+  .voice-section .section-header p {
+    display: inline-block !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    box-shadow: 2px 2px 0 #0c0c0c !important;
+    border-radius: 999px !important;
+    padding: 5px 16px !important;
+    font-weight: 800 !important;
+    font-size: 12px !important;
+    letter-spacing: 0.05em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 14px !important;
+  }
+
+  .voice-section .section-header h2,
+  .voice-section .section-header h2 .word > span {
+    color: #0c0c0c !important;
+    font-family: 'Sora', system-ui, sans-serif !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .voice-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+    width: 100% !important;
+    max-width: 1200px !important;
+    margin: 40px auto 0 !important;
+  }
+
+  .voice-item {
+    display: flex !important;
+    gap: 18px !important;
+    padding: 22px !important;
+    background: #ffffff !important;
+    color: #0c0c0c !important;
+    border: 2px solid #0c0c0c !important;
+    border-radius: 20px !important;
+    box-shadow: 4px 4px 0 #0c0c0c !important;
+    text-align: left !important;
+    cursor: pointer !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+
+  .voice-item:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 6px 6px 0 #0c0c0c !important;
+  }
+
+  .voice-item.playing {
+    border-color: #ff5d8f !important;
+    box-shadow: 6px 6px 0 #ff5d8f !important;
+  }
+
+  .voice-num {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    flex-shrink: 0 !important;
+    background: #e4e61e !important;
+    color: #0c0c0c !important;
+    border: 1.5px solid #0c0c0c !important;
+    border-radius: 12px !important;
+    font-weight: 800 !important;
+    font-size: 15px !important;
+    font-family: 'Sora', monospace !important;
+  }
+
+  .voice-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    flex: 1 !important;
+  }
+
+  .voice-cat {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    color: #ff5d8f !important;
+  }
+
+  .voice-text {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    color: #0c0c0c !important;
+    line-height: 1.4 !important;
+    font-style: italic !important;
+  }
+
+  .voice-response {
+    background: #faf4b7 !important;
+    border-left: 3px solid #e4e61e !important;
+    padding: 10px 14px !important;
+    border-radius: 10px !important;
+    font-size: 13.5px !important;
+    color: #0c0c0c !important;
+    line-height: 1.5 !important;
+    margin-top: 4px !important;
+  }
+
+  .voice-wave {
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: 3px !important;
+    height: 20px !important;
+    margin-top: 4px !important;
+  }
+
+  .voice-wave span {
+    display: block !important;
+    width: 3px !important;
+    background: #0c0c0c !important;
+    border-radius: 2px !important;
+    height: 6px !important;
+  }
+
+  .voice-item.playing .voice-wave span {
+    animation: wave-bounce 0.8s ease-in-out infinite alternate !important;
+  }
+
+  @keyframes wave-bounce {
+    0% { height: 4px; }
+    100% { height: 20px; }
+  }
+
+  @media (max-width: 860px) {
+    .voice-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
 <script>
   // Interactive Voice preview with Web Audio synth chime and SpeechSynthesis support
   const voiceItems = document.querySelectorAll<HTMLButtonElement>('.voice-item');
