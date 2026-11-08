@@ -7422,3 +7422,184 @@ button.btn-tools-header:active {
     justify-content: center !important;
   }
 }
+
+/* ============================================================
+   MODERN & SMOOTH SCROLL REVEAL ANIMATIONS (BELAJAR AI / LINEAR STYLE)
+   Silky smooth, lightweight, hardware-accelerated animations per section
+   ============================================================ */
+
+/* 1. Global Smooth Scroll */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* 2. Base State for Scroll Reveal Elements */
+.scroll-reveal,
+.section-header,
+.product-card,
+.tool-card,
+.voice-item,
+.bento-item,
+.culture-community-box,
+.feature-tile,
+.proc-card,
+.faq-item,
+.chronchi-card,
+.phone-mockup,
+.about-founder-card,
+.about-studio-card,
+.procurement-banner,
+.comparison-table-wrapper,
+.comparison-interactive-wrapper,
+.tools-header-action,
+.tools-cta-row,
+.footer-desc,
+.footer-social,
+.footer-col {
+  opacity: 0;
+  transform: translateY(26px) scale(0.985);
+  transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              background 0.2s ease,
+              border-color 0.2s ease;
+  will-change: opacity, transform;
+}
+
+/* 3. Section Headers Smooth Glide */
+.section-header {
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 4. Active Revealed State (.in) */
+.scroll-reveal.in,
+.section-header.in,
+.product-card.in,
+.tool-card.in,
+.voice-item.in,
+.bento-item.in,
+.culture-community-box.in,
+.feature-tile.in,
+.proc-card.in,
+.faq-item.in,
+.chronchi-card.in,
+.phone-mockup.in,
+.about-founder-card.in,
+.about-studio-card.in,
+.procurement-banner.in,
+.comparison-table-wrapper.in,
+.comparison-interactive-wrapper.in,
+.tools-header-action.in,
+.tools-cta-row.in,
+.footer-desc.in,
+.footer-social.in,
+.footer-col.in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 5. Staggered Cascading Delays for Aesthetic Flow */
+/* Products Section */
+.product-card:nth-child(1).in { transition-delay: 0.04s; }
+.product-card:nth-child(2).in { transition-delay: 0.12s; }
+.product-card:nth-child(3).in { transition-delay: 0.20s; }
+
+/* Culture / Bento Section */
+.bento-item:nth-child(1).in { transition-delay: 0.04s; }
+.bento-item:nth-child(2).in { transition-delay: 0.10s; }
+.bento-item:nth-child(3).in { transition-delay: 0.16s; }
+.bento-item:nth-child(4).in { transition-delay: 0.22s; }
+.bento-item:nth-child(5).in { transition-delay: 0.28s; }
+.culture-community-box.in { transition-delay: 0.12s; }
+
+/* Voice Engine Items */
+.voice-item:nth-child(1).in { transition-delay: 0.03s; }
+.voice-item:nth-child(2).in { transition-delay: 0.08s; }
+.voice-item:nth-child(3).in { transition-delay: 0.13s; }
+.voice-item:nth-child(4).in { transition-delay: 0.18s; }
+.voice-item:nth-child(5).in { transition-delay: 0.23s; }
+.voice-item:nth-child(6).in { transition-delay: 0.28s; }
+
+/* 47 MCP Tools Grid */
+.tools-header-action.in { transition-delay: 0.06s; }
+.tool-card:nth-child(1).in { transition-delay: 0.03s; }
+.tool-card:nth-child(2).in { transition-delay: 0.07s; }
+.tool-card:nth-child(3).in { transition-delay: 0.11s; }
+.tool-card:nth-child(4).in { transition-delay: 0.15s; }
+.tool-card:nth-child(5).in { transition-delay: 0.19s; }
+.tool-card:nth-child(6).in { transition-delay: 0.23s; }
+.tool-card:nth-child(7).in { transition-delay: 0.27s; }
+.tool-card:nth-child(8).in { transition-delay: 0.31s; }
+.tools-cta-row.in { transition-delay: 0.15s; }
+
+/* Comparison Section */
+.comparison-table-wrapper.in { transition-delay: 0.08s; }
+.comparison-interactive-wrapper.in { transition-delay: 0.08s; }
+
+/* Chronchi BLE Showcase */
+.phone-mockup.in { transition-delay: 0.06s; }
+.chronchi-card.in { transition-delay: 0.12s; }
+.feature-tile:nth-child(1).in { transition-delay: 0.04s; }
+.feature-tile:nth-child(2).in { transition-delay: 0.09s; }
+.feature-tile:nth-child(3).in { transition-delay: 0.14s; }
+.feature-tile:nth-child(4).in { transition-delay: 0.19s; }
+
+/* About & Founder Section */
+.about-founder-card.in { transition-delay: 0.06s; }
+.about-studio-card.in { transition-delay: 0.14s; }
+
+/* Procurement Section */
+.procurement-banner.in { transition-delay: 0.04s; }
+.proc-card:nth-child(1).in { transition-delay: 0.06s; }
+.proc-card:nth-child(2).in { transition-delay: 0.13s; }
+.proc-card:nth-child(3).in { transition-delay: 0.20s; }
+.proc-card:nth-child(4).in { transition-delay: 0.27s; }
+
+/* FAQ Section */
+.faq-item:nth-child(1).in { transition-delay: 0.04s; }
+.faq-item:nth-child(2).in { transition-delay: 0.09s; }
+.faq-item:nth-child(3).in { transition-delay: 0.14s; }
+.faq-item:nth-child(4).in { transition-delay: 0.19s; }
+.faq-item:nth-child(5).in { transition-delay: 0.24s; }
+.faq-item:nth-child(6).in { transition-delay: 0.29s; }
+
+/* Footer Elements */
+.footer-desc.in { transition-delay: 0.05s; }
+.footer-social.in { transition-delay: 0.10s; }
+.footer-col:nth-child(1).in { transition-delay: 0.06s; }
+.footer-col:nth-child(2).in { transition-delay: 0.12s; }
+.footer-col:nth-child(3).in { transition-delay: 0.18s; }
+.footer-col:nth-child(4).in { transition-delay: 0.24s; }
+
+/* 6. Accessibility & Reduced Motion Protection */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal,
+  .section-header,
+  .product-card,
+  .tool-card,
+  .voice-item,
+  .bento-item,
+  .culture-community-box,
+  .feature-tile,
+  .proc-card,
+  .faq-item,
+  .chronchi-card,
+  .phone-mockup,
+  .about-founder-card,
+  .about-studio-card,
+  .procurement-banner,
+  .comparison-table-wrapper,
+  .comparison-interactive-wrapper,
+  .tools-header-action,
+  .tools-cta-row,
+  .footer-desc,
+  .footer-social,
+  .footer-col {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}

@@ -291,25 +291,79 @@ const jsonLdBreadcrumbs = {
 
     <PreorderModal />
 
-    <script>
-      // Global Intersection Observer for staggered scroll reveals
-      const revealEls = document.querySelectorAll(
-        '.product-card, .tool-card, .voice-item, .buy-card, .section-header, .bento-item, .footer-brand'
-      );
+    <script is:inline>
+      (function () {
+        var selector = [
+          '.section-header',
+          '.product-card',
+          '.bento-item',
+          '.culture-community-box',
+          '.voice-item',
+          '.tool-card',
+          '.tools-header-action',
+          '.tools-cta-row',
+          '.comparison-table-wrapper',
+          '.comparison-interactive-wrapper',
+          '.phone-mockup',
+          '.chronchi-card',
+          '.feature-tile',
+          '.about-founder-card',
+          '.about-studio-card',
+          '.procurement-banner',
+          '.proc-card',
+          '.faq-item',
+          '.footer-desc',
+          '.footer-social',
+          '.footer-col',
+          '.scroll-reveal'
+        ].join(', ');
 
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('reveal', 'in');
-              io.unobserve(entry.target);
+        function initScrollReveals() {
+          var elements = document.querySelectorAll(selector);
+          var vh = window.innerHeight || document.documentElement.clientHeight;
+
+          // Reveal immediately if already in view (or above fold) on load
+          elements.forEach(function (el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.top < vh - 20) {
+              el.classList.add('in');
             }
           });
-        },
-        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
-      );
 
-      revealEls.forEach((el) => io.observe(el));
+          if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(
+              function (entries) {
+                entries.forEach(function (entry) {
+                  if (entry.isIntersecting) {
+                    entry.target.classList.add('in');
+                    observer.unobserve(entry.target);
+                  }
+                });
+              },
+              {
+                threshold: 0.08,
+                rootMargin: '0px 0px -40px 0px'
+              }
+            );
+
+            elements.forEach(function (el) {
+              if (!el.classList.contains('in')) {
+                observer.observe(el);
+              }
+            });
+          } else {
+            elements.forEach(function (el) {
+              el.classList.add('in');
+            });
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initScrollReveals);
+        } else {
+          initScrollReveals();
+        }
+      })();
     </script>
   </body>
 </html>
