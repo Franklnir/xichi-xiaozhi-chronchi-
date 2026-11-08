@@ -43,17 +43,17 @@
   </div>
 
   <h1 aria-label="Asisten AI Fisik Teman Masa Depan">
-    <span class="line" aria-hidden="true">
-      Asisten
+    <span class="line line-1" aria-hidden="true">
+      <span class="hero-word-asisten">Asisten</span>
       <span class="avatars">
         <img src="/assets/logoxichi.jpg" alt="" width="240" height="240" />
         <img src="/assets/products/xichi-pocket-real.webp" alt="" width="240" height="240" />
         <img src="/assets/products/xichi-core-render.webp" alt="" width="240" height="240" />
       </span>
-      AI Fisik
+      <span class="hero-word-aifisik">AI Fisik</span>
     </span>
-    <span class="line" aria-hidden="true">
-      Teman Masa Depan
+    <span class="line line-2" aria-hidden="true">
+      <span class="hero-word-sub">Teman Masa Depan</span>
     </span>
   </h1>
 
@@ -115,13 +115,14 @@
 
   h1 {
     font-family: "Sora", system-ui, -apple-system, sans-serif !important;
-    font-size: clamp(2.5rem, 6.2vw, 5rem) !important;
+    font-size: clamp(2rem, 6.2vw, 5rem) !important;
     font-weight: 800 !important;
-    line-height: 1.16 !important;
+    line-height: 1.18 !important;
     letter-spacing: -.03em !important;
     color: var(--ink) !important;
     text-transform: none !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
+    max-width: 980px !important;
   }
 
   .line {
@@ -137,10 +138,27 @@
     animation-delay: .12s !important;
   }
 
+  .line-1 {
+    flex-wrap: wrap !important;
+    row-gap: 8px !important;
+    column-gap: 12px !important;
+  }
+
+  .hero-word-asisten,
+  .hero-word-aifisik {
+    display: inline-block !important;
+    white-space: nowrap !important;
+  }
+
+  .hero-word-sub {
+    display: inline-block !important;
+  }
+
   .avatars {
     display: inline-flex !important;
     align-items: center !important;
     vertical-align: middle !important;
+    flex-shrink: 0 !important;
   }
   .avatars img {
     display: block !important;
@@ -326,6 +344,95 @@
   @media (max-width: 1240px) {
     .float-bubble, .react, .spark, .cursor {
       display: none !important;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 42px 16px 56px !important;
+    }
+
+    h1 {
+      font-size: clamp(1.65rem, 7.2vw, 2.35rem) !important;
+      line-height: 1.24 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    .line {
+      gap: 6px !important;
+    }
+
+    .line-1 {
+      row-gap: 6px !important;
+      column-gap: 8px !important;
+      justify-content: center !important;
+    }
+
+    .hero-word-asisten {
+      font-size: inherit !important;
+    }
+
+    .avatars {
+      margin: 0 2px !important;
+    }
+
+    .avatars img {
+      width: 0.92em !important;
+      height: 0.92em !important;
+    }
+
+    .avatars img + img {
+      margin-left: -0.22em !important;
+    }
+
+    .hero-word-aifisik {
+      white-space: nowrap !important;
+      font-size: inherit !important;
+    }
+
+    .line-2 {
+      margin-top: 4px !important;
+    }
+
+    .hero-word-sub {
+      white-space: normal !important;
+      text-align: center !important;
+      line-height: 1.22 !important;
+    }
+
+    .lead {
+      font-size: 14.5px !important;
+      line-height: 1.6 !important;
+      margin-top: 18px !important;
+      padding: 0 8px !important;
+    }
+
+    .cta {
+      flex-direction: column !important;
+      align-items: stretch !important;
+      width: 100% !important;
+      max-width: 330px !important;
+      margin: 28px auto 0 !important;
+      gap: 12px !important;
+    }
+
+    .btn-lg {
+      width: 100% !important;
+      min-width: 0 !important;
+      padding: 14px 22px !important;
+      font-size: 14px !important;
+      justify-content: center !important;
+      text-align: center !important;
+    }
+  }
+
+  @media (max-width: 380px) {
+    h1 {
+      font-size: 1.5rem !important;
+    }
+    .avatars img {
+      width: 0.85em !important;
+      height: 0.85em !important;
     }
   }
 </style>

@@ -6033,9 +6033,114 @@ header.site-header.is-floating .nav {
 }
 
 @media (max-width: 960px) {
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
-  .nav { padding: 14px 20px; }
+  .nav-links { display: none !important; }
+  .hamburger { display: flex !important; }
+  .nav { padding: 12px 18px !important; }
+}
+
+@media (max-width: 640px) {
+  header.site-header {
+    padding: 0 !important;
+  }
+
+  .nav {
+    padding: 10px 14px !important;
+    gap: 10px !important;
+    border-radius: 0 0 20px 20px !important;
+  }
+
+  header.site-header.is-floating {
+    padding: 8px 10px 0 !important;
+  }
+
+  header.site-header.is-floating .nav {
+    border-radius: 999px !important;
+    padding: 8px 12px !important;
+    gap: 8px !important;
+  }
+
+  .logo {
+    gap: 9px !important;
+  }
+
+  .logo img {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 10px !important;
+  }
+
+  .logo-text b {
+    font-size: 15px !important;
+  }
+
+  .logo-text small {
+    display: none !important; /* Ringkas logo di mobile agar tidak sempit */
+  }
+
+  .nav-right {
+    gap: 8px !important;
+  }
+
+  .nav-right .btn-sm {
+    padding: 7px 12px !important;
+    font-size: 12px !important;
+    gap: 4px !important;
+    white-space: nowrap !important;
+  }
+
+  .hamburger {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 7px !important;
+    border-radius: 10px !important;
+  }
+
+  .hamburger span {
+    height: 2px !important;
+  }
+
+  .mobile-menu {
+    inset: 56px 0 0 0 !important;
+    padding: 20px 16px 40px !important;
+    overflow-y: auto !important;
+    z-index: 9999 !important;
+  }
+
+  .mobile-links {
+    gap: 12px !important;
+  }
+
+  .mobile-link {
+    font-size: 16px !important;
+    padding: 12px 16px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav {
+    padding: 8px 10px !important;
+    gap: 6px !important;
+  }
+
+  .logo img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  .logo-text b {
+    font-size: 13.5px !important;
+  }
+
+  .nav-right .btn-sm {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .hamburger {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 6px !important;
+  }
 }
 
 .mobile-menu {
@@ -6044,7 +6149,8 @@ header.site-header.is-floating .nav {
   inset: 72px 0 0 0;
   background: rgba(235, 235, 235, 0.98);
   backdrop-filter: blur(16px);
-  z-index: 99;
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 9999;
   padding: 32px 24px;
 }
 .mobile-menu.active {

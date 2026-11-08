@@ -569,8 +569,30 @@ import { mcpCatalogue } from '../data/mcpCatalogue';
   }
 
   @media (max-width: 640px) {
+    .btn-tools-header {
+      width: calc(100% - 24px) !important;
+      max-width: 360px !important;
+      padding: 11px 16px !important;
+      font-size: 12px !important;
+      line-height: 1.4 !important;
+      justify-content: center !important;
+      text-align: center !important;
+      white-space: normal !important;
+    }
+
     .tools-grid {
       grid-template-columns: 1fr !important;
+    }
+
+    .tools-cta-row .btn-brutal,
+    .tools-cta-row .btn {
+      width: 100% !important;
+      max-width: 330px !important;
+      padding: 14px 20px !important;
+      font-size: 13.5px !important;
+      justify-content: center !important;
+      white-space: normal !important;
+      text-align: center !important;
     }
   }
 </style>
