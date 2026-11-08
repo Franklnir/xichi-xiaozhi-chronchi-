@@ -6697,7 +6697,7 @@ button.btn-tools-header:active {
 :root[data-theme='brand'] .modal-overlay {
   position: fixed !important;
   inset: 0 !important;
-  z-index: 100030 !important;
+  z-index: 999999 !important;
   background: rgba(12, 12, 12, 0.52) !important;
   -webkit-backdrop-filter: blur(16px) !important;
   backdrop-filter: blur(16px) !important;
@@ -6711,6 +6711,13 @@ button.btn-tools-header:active {
   transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s !important;
 }
 
+.mcp-modal-overlay:not(.active) {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 .mcp-modal-overlay.active,
 .specs-modal-overlay.active,
 .modal-overlay.active {
@@ -6718,6 +6725,7 @@ button.btn-tools-header:active {
   visibility: visible !important;
   pointer-events: auto !important;
   display: flex !important;
+  z-index: 999999 !important;
 }
 
 /* 3. Sleek Rounded Island Modal Cards (Belajar AI Style: 36px radius, soft drop shadow) */
