@@ -5869,14 +5869,33 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
 /* ============================================================
    BELAJAR AI CLEAN NAVBAR
    ============================================================ */
+/* ============================================================
+   BELAJAR AI CLEAN NAVBAR (SMART HIDE ON SCROLL DOWN, FLOATING ISLAND ON SCROLL UP)
+   ============================================================ */
 header.site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  transform: translateY(0);
+  transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1), padding 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+header.site-header * {
+  pointer-events: auto;
+}
+
+/* Sembunyi saat scroll ke bawah */
+header.site-header.nav-hidden {
+  transform: translateY(-120%);
 }
 
 .nav {
   width: var(--container);
+  max-width: 1200px;
   margin: 0 auto;
   padding: 16px 28px;
   display: flex;
@@ -5887,6 +5906,38 @@ header.site-header {
   border-radius: 0 0 28px 28px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, .05);
   border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: max-width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s ease,
+              background 0.35s ease,
+              border-color 0.35s ease;
+}
+
+/* Tampil Seperti Ngambang saat scroll ke atas (Floating Island Capsule) */
+header.site-header.is-floating {
+  padding: 14px 24px 0;
+}
+
+header.site-header.is-floating .nav {
+  max-width: 1040px;
+  border-radius: 999px;
+  padding: 10px 24px;
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04) !important;
+  border: 1.5px solid rgba(12, 12, 12, 0.1) !important;
+}
+
+@media (max-width: 960px) {
+  header.site-header.is-floating {
+    padding: 10px 14px 0;
+  }
+  header.site-header.is-floating .nav {
+    border-radius: 22px;
+    padding: 10px 16px;
+  }
 }
 
 .logo {

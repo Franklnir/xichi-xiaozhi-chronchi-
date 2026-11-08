@@ -115,74 +115,121 @@ const resolveHref = (href: string) => {
   }
 </style>
 
-<script>
-  // Navbar scroll & mobile menu handling
-  const navbar = document.getElementById('navbar');
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.nav-links a');
-  const mobileLinks = document.querySelectorAll<HTMLAnchorElement>('.mobile-link');
+<script is:inline>
+  (function () {
+    var header = document.querySelector('header.site-header');
+    var navbar = document.getElementById('navbar');
+    var hamburger = document.getElementById('hamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    var navLinks = document.querySelectorAll('.nav-links a');
+    var mobileLinks = document.querySelectorAll('.mobile-link');
 
-  // Shrink navbar on scroll
-  window.addEventListener(
-    'scroll',
-    () => {
-      if (navbar) {
-        navbar.classList.toggle('scrolled', window.scrollY > 40);
+    var lastScrollY = window.scrollY;
+    var isTicking = false;
+
+    function handleScroll() {
+      var currentScrollY = window.scrollY;
+      var isMobileOpen = mobileMenu && mobileMenu.classList.contains('active');
+
+      // Do not hide navbar if mobile menu is open
+      if (isMobileOpen) {
+        if (header) header.classList.remove('nav-hidden');
+        isTicking = false;
+        return;
       }
-    },
-    { passive: true }
-  );
 
-  // Toggle mobile menu
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      const open = mobileMenu.classList.toggle('active');
-      hamburger.classList.toggle('active', open);
-      hamburger.setAttribute('aria-expanded', String(open));
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-
-    mobileLinks.forEach((l) => {
-      l.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-
-  // Active link on scroll
-  const sectionMapping: Record<string, string> = {
-    home: 'home',
-    products: 'products',
-    culture: 'culture',
-    voice: 'voice',
-    tools: 'tools',
-    comparison: 'comparison',
-    chronchi: 'chronchi',
-    about: 'about',
-    pengadaan: 'pengadaan',
-    faq: 'faq',
-  };
-
-  const sectionIds = Object.keys(sectionMapping);
-  window.addEventListener(
-    'scroll',
-    () => {
-      let currentSection = 'home';
-      sectionIds.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 200) {
-          currentSection = id;
+      // At the very top (normal resting state, not floating)
+      if (currentScrollY <= 25) {
+        if (header) {
+          header.classList.remove('nav-hidden');
+          header.classList.remove('is-floating');
         }
+        if (navbar) navbar.classList.remove('scrolled');
+        lastScrollY = currentScrollY;
+        isTicking = false;
+        return;
+      }
+
+      var delta = currentScrollY - lastScrollY;
+
+      // Sensitivity threshold (6px) to avoid twitching
+      if (Math.abs(delta) > 6) {
+        if (delta > 0 && currentScrollY > 90) {
+          // Scrolling DOWN -> Sembunyikan navbar ke atas
+          if (header) {
+            header.classList.add('nav-hidden');
+          }
+        } else if (delta < 0) {
+          // Scrolling UP -> Munculkan navbar tampil seperti ngambang (floating island)
+          if (header) {
+            header.classList.remove('nav-hidden');
+            header.classList.add('is-floating');
+          }
+          if (navbar) navbar.classList.add('scrolled');
+        }
+        lastScrollY = currentScrollY;
+      }
+
+      isTicking = false;
+    }
+
+    window.addEventListener(
+      'scroll',
+      function () {
+        if (!isTicking) {
+          window.requestAnimationFrame(handleScroll);
+          isTicking = true;
+        }
+      },
+      { passive: true }
+    );
+
+    // Initial check
+    handleScroll();
+
+    // Toggle mobile menu
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function () {
+        var open = mobileMenu.classList.toggle('active');
+        hamburger.classList.toggle('active', open);
+        hamburger.setAttribute('aria-expanded', String(open));
+        if (header) header.classList.remove('nav-hidden');
+        document.body.style.overflow = open ? 'hidden' : '';
       });
-      navLinks.forEach((link) => {
-        const target = link.getAttribute('href')?.replace('#', '').replace('/', '');
-        link.classList.toggle('active', target === currentSection);
+
+      mobileLinks.forEach(function (l) {
+        l.addEventListener('click', function () {
+          hamburger.classList.remove('active');
+          mobileMenu.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        });
       });
-    },
-    { passive: true }
-  );
+    }
+
+    // Active link on scroll
+    var sectionIds = ['home', 'products', 'culture', 'voice', 'tools', 'comparison', 'chronchi', 'about', 'pengadaan', 'faq'];
+    window.addEventListener(
+      'scroll',
+      function () {
+        var currentSection = 'home';
+        var scrollPos = window.scrollY;
+        for (var i = 0; i < sectionIds.length; i++) {
+          var el = document.getElementById(sectionIds[i]);
+          if (el && scrollPos >= el.offsetTop - 220) {
+            currentSection = sectionIds[i];
+          }
+        }
+        navLinks.forEach(function (link) {
+          var target = (link.getAttribute('href') || '').replace('#', '').replace('/', '');
+          if (target === currentSection) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      },
+      { passive: true }
+    );
+  })();
 </script>
