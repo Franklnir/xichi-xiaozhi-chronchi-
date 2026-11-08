@@ -5319,15 +5319,39 @@ h1, h2, h3, h4, .logo-box, .nav-pill a, .marquee-content {
   background: #ffffff !important;
   color: #0c0c0c !important;
   border: 2px solid #0c0c0c !important;
-  box-shadow: 2px 2px 0 #0c0c0c !important;
-  font-weight: 800 !important;
+  box-shadow: 2.5px 2.5px 0 #0c0c0c !important;
+  border-radius: 50% !important;
+  width: 44px !important;
+  height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
 }
 
 :root[data-theme='brand'] .footer-social a:hover {
-  background: #facc15 !important;
-  color: #0c0c0c !important;
-  transform: translate(-2px, -2px) !important;
+  transform: translate(-2px, -2px) scale(1.06) !important;
   box-shadow: 4px 4px 0 #0c0c0c !important;
+}
+
+:root[data-theme='brand'] .footer-social a.social-instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%) !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme='brand'] .footer-social a.social-tiktok:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme='brand'] .footer-social a.social-youtube:hover {
+  background: #ff0000 !important;
+  color: #ffffff !important;
+}
+
+:root[data-theme='brand'] .footer-social a.social-github:hover {
+  background: #181717 !important;
+  color: #ffffff !important;
 }
 
 /* GENERAL MODALS ON BRAND INK */
