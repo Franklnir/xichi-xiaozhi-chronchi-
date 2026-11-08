@@ -64,26 +64,55 @@ const { whatsappNumber } = siteConfig;
       }
     }
     modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    modal.style.setProperty('display', 'flex', 'important');
+    modal.style.setProperty('opacity', '1', 'important');
+    modal.style.setProperty('visibility', 'visible', 'important');
+    modal.style.setProperty('pointer-events', 'auto', 'important');
+    modal.style.setProperty('z-index', '999999', 'important');
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal() {
     if (!modal) return;
     modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    modal.style.setProperty('display', 'none', 'important');
+    modal.style.setProperty('opacity', '0', 'important');
+    modal.style.setProperty('visibility', 'hidden', 'important');
+    modal.style.setProperty('pointer-events', 'none', 'important');
     document.body.style.overflow = '';
   }
 
+  window.openPreorderModal = openModal;
+  window.closePreorderModal = closeModal;
+
   // Open modal triggers from across the page
-  document.querySelectorAll('.open-preorder-modal, .btn-buy').forEach((btn) => {
+  document.querySelectorAll('.open-preorder-modal, .btn-buy, [data-open-preorder]').forEach((btn) => {
     btn.addEventListener('click', (e) => {
-      // If it's a direct anchor jump with #buy, let it jump, or if clicked on CTA, open modal
       const tierTitle = btn.getAttribute('data-title') || btn.getAttribute('data-product');
-      if (tierTitle || btn.classList.contains('open-preorder-modal')) {
+      if (tierTitle || btn.classList.contains('open-preorder-modal') || btn.hasAttribute('data-open-preorder')) {
         e.preventDefault();
         openModal(tierTitle || '');
       }
     });
   });
+
+  // Delegated document click (capture phase) for bulletproof click handling
+  document.addEventListener(
+    'click',
+    (e) => {
+      const target = e.target;
+      if (!target) return;
+      const trigger = target.closest && target.closest('.open-preorder-modal, .btn-buy, [data-open-preorder]');
+      if (trigger) {
+        e.preventDefault();
+        const tierTitle = trigger.getAttribute('data-title') || trigger.getAttribute('data-product');
+        openModal(tierTitle || '');
+      }
+    },
+    true
+  );
 
   closeBtn?.addEventListener('click', closeModal);
   modal?.addEventListener('click', (e) => {
@@ -94,11 +123,15 @@ const { whatsappNumber } = siteConfig;
   });
 
   // Submit via WhatsApp
-  btnSubmitWa?.addEventListener('click', () => {
-    const name = (document.getElementById('customerName')).value.trim();
-    const phone = (document.getElementById('customerPhone')).value.trim();
-    const address = (document.getElementById('customerAddress')).value.trim();
-    const variant = variantSelect.value;
+  function submitWa() {
+    const nameEl = document.getElementById('customerName');
+    const phoneEl = document.getElementById('customerPhone');
+    const addressEl = document.getElementById('customerAddress');
+
+    const name = nameEl ? nameEl.value.trim() : '';
+    const phone = phoneEl ? phoneEl.value.trim() : '';
+    const address = addressEl ? addressEl.value.trim() : '';
+    const variant = variantSelect ? variantSelect.value : '';
 
     if (!name || !phone) {
       alert('Mohon lengkapi nama dan nomor WhatsApp Anda terlebih dahulu.');
@@ -109,31 +142,15 @@ const { whatsappNumber } = siteConfig;
     const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
     window.open(waUrl, '_blank');
     closeModal();
+  }
+
+  btnSubmitWa?.addEventListener('click', (e) => {
+    e.preventDefault();
+    submitWa();
   });
 
-  // Submit via Backend API (/api/preorder)
-  form?.addEventListener('submit', async (e) => {
+  form?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
-
-    try {
-      const res = await fetch('/api/preorder', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json();
-      if (data.ok) {
-        alert('🎉 Terima kasih! Pre-order Anda telah tersimpan di sistem Xichi. Tim kami akan menghubungi nomor WA Anda segera.');
-        form.reset();
-        closeModal();
-      } else {
-        alert('Gagal menyimpan pre-order: ' + (data.message || 'Terjadi kesalahan'));
-      }
-    } catch (err) {
-      alert('Pre-order tersimpan secara lokal. Silakan lanjutkan konfirmasi melalui WhatsApp.');
-      closeModal();
-    }
+    submitWa();
   });
 </script>
